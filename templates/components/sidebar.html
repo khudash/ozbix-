@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <!-- ============= site bar =============-->
+ <div id="sidebar"
+     class="hidden xl:flex fixed left-0 h-screen w-20 bg-white border-r border-gray-800 flex-col justify-between items-center py-16 z-50 transition-all duration-300">
+
+    <!--=== get in touch -->
+     <div class="flex flex-col items-center gap-16 lg:gap-28">
+        <div class="flex flex-col items-center">
+            <button onclick="modal.classList.remove('hidden')" class="rotate-[-90deg] whitespace-nowrap font-bold tracking-wider mb-16 mt-16">
+                GET IN TOUCH
+            </button>
+            <img src="{% static 'images/chat (1).webp' %}" class="w-8 h-8 mb-12" alt="Icon">
+        </div>
+
+        <div class="flex flex-col items-center">
+            <a href="https://wa.me/+923175448546" target="_blank">
+              <button onclick="openWhatsApp()" class="rotate-[-90deg] whitespace-nowrap font-bold tracking-wider mb-12">
+                 WHATSAPP
+              </button>
+            </a>
+
+         <script>
+           function openWhatsApp() {
+           window.open("https://wa.me/923001234567", "_blank");
+             }
+         </script>
+            <img src="{% static 'images/whatsapp (1).webp' %}" class="w-6 h-6 mb-10" alt="Icon">
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>

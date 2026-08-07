@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+ 
+<!--====== Navbar ======= -->
+
+<div id="navbar" class="fixed top-0 left-0 w-full z-50">
+    <div class="bg-[#ab1f2b] h-14 flex justify-between items-center px-2 md:px-4">
+        <div class="flex items-center">
+            <div class="px-2 md:px-8">
+                <a href="{% url 'home' %}">
+                 <img src="{% static 'images/oz-logo.webp' %}" class="h-12 rounded-lg px-10" alt="">
+                </a>
+             </div>
+
+            <div class="bg-white h-14 flex items-center px-3 md:px-8 rounded-t-lg">
+                <h2 class="text-[#ab1f2b] font-bold text-sm md:text-base">
+                    OZBIX IT SOLUTIONS
+                </h2>
+            </div>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-5 text-white pr-8">
+            <span class="font-semibold">Follow Us |</span>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </div>
+    </div>
+
+    <!-- ==== Bottom Navbar ===== -->
+
+ <nav class="flex items-center justify-between h-16 bg-white shadow-md px-2 md:px-4">
+      <!--== wepsite ==-->
+            <div class="menu-btn">
+               <a onclick="openMenu()" class="text-2xl cursor-pointer">
+                  <i class="fa-solid fa-bars ml-4"></i>
+               </a>
+            </div>
+
+   <div id="sideMenu"
+      class="fixed top-0 left-0  h-[55%] w-[85%] md:w-[300px] bg-black/95 text-white transform -translate-x-full transition-transform duration-500 z-50">
+      
+   <ul class="navbar hidden min-[1200px]:flex justify-center items-center gap-6 xl:gap-10 flex-1 font-bold"></ul>
+
+    <button onclick="closeMenu()"
+        class="absolute top-6 right-8 text-4xl">&times;</button>
+
+      <!--= Menu =-->
+
+   <div class="flex flex-col mt-8 px-34 ml-10">
+
+        <a href="{% url 'home' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-house mr-3"></i> Home
+        </a>
+
+        <a href="{% url 'shopify' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-brands fa-shopify mr-3"></i> Shopify
+        </a>
+
+        <a href="{% url 'wordpress' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-brands fa-wordpress mr-3"></i> WordPress
+        </a>
+
+        <a href="{% url 'ecommerce' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-cart-shopping mr-3"></i> E-Commerce
+        </a>
+
+        <a href="{% url 'webdesign' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-laptop-code mr-3"></i> Web Design
+        </a>
+
+        <a href="{% url 'portfolio' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-laptop-code mr-3"></i> portfolio
+        </a>
+    </div>
+  </div>
+
+<ul class="hidden min-[1200px]:flex justify-center gap-10 font-bold">
+
+          <li class="relative group cursor-pointer">
+    <span class="flex items-center gap-1">
+        WEBSITE
+        <i class="fa-solid fa-chevron-down text-xs"></i>
+    </span>
+
+    <!--============ Wepsite Menu ============-->
+   <div
+       class="absolute left-0 top-full mt-5  w-[95vw] sm:w-[90vw] md:w-[750px] lg:w-[700px] bg-white rounded-3xl shadow-2xl p-5 lg:p-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+        <div class="grid grid-cols-3 gap-8">
+            <div class="col-span-2">
+                <div class="bg-purple-100 rounded-2xl p-5 flex items-center gap-4 mb-8">
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-globe text-2xl text-blue-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold"> WEBSITE DEVELOPMENT </h2>
+                </div>
+
+                <div class="space-y-9">
+                    <a href="{% url 'shopify' %}" class="block ">
+                        <h3 class="text-2xl font-bold">Shopify</h3>
+                        <p class="text-gray-600"> Powerful e-commerce platform for businesses.</p>
+                    </a>
+
+                    <a href="{% url 'wordpress' %}" class="block ">
+                        <h3 class="text-2xl font-bold">WordPress</h3>
+                        <p class="text-gray-600">Popular CMS for website management.</p>
+                    </a>
+
+                    <a href="{% url 'ecommerce' %}" class="block ">
+                        <h3 class="text-2xl font-bold">E-Commerce</h3>
+                        <p class="text-gray-600"> Buying and selling products online.</p>
+                    </a>
+
+                    <a href="{% url 'webdesign' %}" class="block ">
+                        <h3 class="text-2xl font-bold"> Web Design & Development </h3>
+                        <p class="text-gray-600"> Creating and refining websites.</p>
+                    </a>
+
+                </div>
+            </div>
+
+            <!--== img ==-->
+            <div class="bg-gray-100 rounded-3xl p-6">
+                <h2 class="text-3xl font-bold">View all services</h2>
+                <p class="mt-3 text-gray-600"> We don't stop here, check out all the services we offer.</p>
+               <img src="../images/computer.gif" class="mt-10 rounded-xl">
+            </div>
+        </div>
+    </div>
+    </li>
+            <li>MARKETING</li>
+            <li>SEO</li>
+            <li>GRAPHIC DESIGNING</li>
+            <li>OTHER SERVICES</li>
+            <li>SOFTWARE SERVICES</li>
+        </ul>
+
+        <div class="hidden md:flex w-48 justify-center">
+            <a href="portfolio.html" class="bg-red-700 shadow-2xl shadow-red-300 text-white font-bold px-6 py-3 rounded-full">
+                PORTFOLIO
+            </a>
+        </div>
+  </nav>
+</div>
+
+<div class="pt-[120px] md:pt-[120px]">
+</div>
+
+</body>
+</html>

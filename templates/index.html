@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <title>Ozbix</title>
+</head>
+<body>
+
+<!--====== Navbar ======= -->
+
+<main class="flex-1 w-full">
+<div class="fixed top-0 left-0 w-full z-50">
+     <div class="bg-[#ab1f2b] h-14 flex justify-between items-center px-2 md:px-4">
+        <div class="flex items-center">
+             <div class="px-2 md:px-8">
+               <img src="{% static 'images/oz-logo.webp' %}" class="h-10 md:h-12 rounded-lg px-2 md:px-20" alt="">
+             </div>
+
+             <div class="bg-white h-14 flex items-center px-3 md:px-8 rounded-t-lg">
+                 <h2 class="text-[#ab1f2b] font-bold text-sm md:text-base">
+                    OZBIX IT SOLUTIONS
+                 </h2>
+             </div>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-5 text-white pr-8">
+            <span class="font-semibold">Follow Us |</span>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+            <i class="fa-brands fa-linkedin"></i>
+        </div>
+    </div>
+    
+
+    <!-- ==== Bottom Navbar ===== -->
+
+ <nav class="flex items-center justify-between h-16 bg-white shadow-md px-2 md:px-4">
+    <!--==== wepsite ====-->
+
+    <div class="menu-btn">
+      <a onclick="openMenu()" class="text-2xl cursor-pointer">
+        <i class="fa-solid fa-bars ml-4"></i>
+      </a>
+    </div>
+      
+  <div id="sideMenu"
+      class="fixed top-0 left-0 h-[55%] w-[85%] md:w-[300px] bg-black/95 text-white transform -translate-x-full transition-transform duration-500 z-50">
+        <button onclick="closeMenu()"
+          class="absolute top-6 right-8 text-4xl">&times;</button>
+
+      <!--== Menu ==-->
+ 
+    <div class="flex flex-col mt-8 px-34 ml-10">
+        <a href="{% url 'home' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-house mr-3"></i> Home
+        </a>
+
+        <a href="{% url 'shopify' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-brands fa-shopify mr-3"></i> Shopify
+        </a>
+
+        <a href="{% url 'wordpress' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-brands fa-wordpress mr-3"></i> WordPress
+        </a>
+
+        <a href="{% url 'ecommerce' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-cart-shopping mr-3"></i> E-Commerce
+        </a>
+
+        <a href="{% url 'webdesign' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-laptop-code mr-3"></i> Web Design
+        </a>
+        <a href="{% url 'portfolio' %}"
+            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-folder-open mr-3"></i> Portfolio
+        </a>
+    </div>
+  </div>
+
+   <ul class="navbar flex justify-center gap-10 font-bold">
+          <li class="relative group cursor-pointer">
+    <span class="flex items-center gap-1">
+        WEBSITE
+        <i class="fa-solid fa-chevron-down text-xs"></i>
+    </span>
+    
+
+    <!--============ Wepsite Menu ============-->
+
+      <div
+        class="absolute left-0 top-full mt-5  w-[95vw] sm:w-[90vw] md:w-[750px] lg:w-[700px] bg-white rounded-3xl shadow-2xl p-5 lg:p-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="bg-purple-100 rounded-2xl p-5 flex items-center gap-4 mb-8">
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-globe text-2xl text-blue-600"></i>
+                    </div>
+                    <h2 class="text-xl lg:text-2xl font-bold"> WEBSITE DEVELOPMENT </h2>
+                </div>
+
+                <div class="space-y-6 lg:space-y-9">
+
+                    <a href="{% url 'shopify' %}" class="block ">
+                        <h3 class="text-2xl font-bold">Shopify</h3>
+                        <p class="text-gray-600"> Powerful e-commerce platform for businesses.</p>
+                    </a>
+
+                    <a href="{% url 'wordpress' %}" class="block ">
+                        <h3 class="text-2xl font-bold">WordPress</h3>
+                        <p class="text-gray-600">Popular CMS for website management.</p>
+                    </a>
+
+                  <a href="{% url 'ecommerce' %}" class="block ">
+                        <h3 class="text-2xl font-bold">E-Commerce</h3>
+                        <p class="text-gray-600"> Buying and selling products online.</p>
+                    </a>
+
+                   <a href="{% url 'webdesign' %}" class="block ">
+                        <h3 class="text-2xl font-bold"> Web Design & Development </h3>
+                        <p class="text-gray-600"> Creating and refining websites.</p>
+                    </a>
+                </div>
+            </div>
+           
+
+            <!--== img ==-->
+            <div class="hidden lg:block bg-gray-100 rounded-3xl p-6">
+                <h2 class="text-3xl font-bold">View all services</h2>
+                <p class="mt-3 text-gray-600"> We don't stop here, check out all the services we offer.</p>
+                <img src="{% static 'images/computer.gif' %}" class="mt-24 rounded-xl">
+            </div>
+
+        </div>
+    </div>
+     </li>
+
+        <li>MARKETING</li>
+        <li>SEO</li>
+        <li>GRAPHIC DESIGNING</li>
+        <li>OTHER SERVICES</li>
+        <li>SOFTWARE SERVICES</li>
+     </ul>
+        <div class="hidden md:flex w-48 justify-center">
+            <a href="{% url 'portfolio' %}" class="bg-red-700 shadow-2xl shadow-red-500 font-bold text-white px-6 py-3   rounded-full">
+                PORTFOLIO
+            </a>
+        </div>
+  </nav>
+</div> 
+
+<div class="pt-[120px] md:pt-[120px]">
+</div>
+
+  <!-- ============================= banner ============================== -->
+
+   <!-- ============= site bar =============-->
+ <div id="sidebar"
+     class="hidden xl:flex fixed left-0 h-screen w-20 bg-white border-r border-gray-800 flex-col justify-between items-center py-16 z-50 transition-all duration-300">
+
+     <div class="flex flex-col items-center gap-16 lg:gap-28">
+        <div class="flex flex-col items-center">
+            <button  onclick="modal.classList.remove('hidden')" class="rotate-[-90deg] whitespace-nowrap font-bold tracking-wider mt-10 lg:mt-20">
+                GET IN TOUCH
+            </button>
+            <img src="{% static 'images/chat (1).webp' %}" class="w-7 h-7 lg:w-8 lg:h-8 mt-10 lg:mt-14" alt="Icon">
+        </div>
+
+         <div class="flex flex-col items-center">
+            <a href="https://wa.me/+923175448546" target="_blank">
+              <button onclick="openWhatsApp()" class="rotate-[-90deg] whitespace-nowrap font-bold tracking-wider mt-10">
+                 WHATSAPP
+              </button>
+            </a>
+
+           <script>
+              function openWhatsApp() {
+              window.open("https://wa.me/923001234567", "_blank");
+               }
+           </script>
+             <img src="{% static 'images/whatsapp (1).webp' %}" class="w-5 h-5 lg:w-6 lg:h-6 mb-10 lg:mt-10" alt="Icon">
+        </div>
+    </div>
+</div>
+
+<!--======= banner img =======-->
+
+   {% if banner %}
+     <img class="w-full h-full overflow-hidden" src="{{ banner.image.url }}" alt="">
+   {% endif %}
+
+    <!--===================== Our Services =========================== -->
+
+<section class="container mx-auto py-8 px-4 md:px-6 lg:px-9">
+    <div>
+       <h1 class="text-center text-4xl md:text-6xl lg:text-8xl py-8 md:py-10 text-red-900 font-bold min-h-[120px] md:h-40 w-full">Our services</h1>
+       
+      <p class="text-center py-5 md:py-7 text-sm md:text-base">Empower your business with our comprehensive IT solutions. From software development to network security, we provide <br> tailored services to drive your success.</p>
+    </div>
+<div class="swiper myServices p-4 md:p-8 lg:ml-10">
+    <div class="swiper-wrapper">
+
+  <!--== Cards ==-->
+  {% for service in services %}
+
+<div class="swiper-slide bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300">
+
+    <!-- Icon -->
+    <div class="text-3xl md:text-4xl mb-4">
+        <i class="{{ service.icon_class }}"></i>
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-xl md:text-2xl font-bold mb-2">
+        {{ service.title }}
+    </h3>
+
+    <!-- Short Description -->
+    <h5 class="text-gray-800 mb-3">
+        {{ service.short_description }}
+    </h5>
+
+    <!-- Description -->
+    <p class="text-gray-500 text-sm md:text-base mb-4">
+        {{ service.description }}
+    </p>
+
+    <!-- Button -->
+  <button class="text-blue-600 font-semibold hover:text-blue-800">
+     {{ service.button_text }} →
+  </button>
+</div>
+{% endfor %}
+
+ </div>
+    <div class="swiper-pagination"></div>
+ </div>
+</section>
+
+<!--========================== Ozbix folio ============================ -->
+
+<section class="relative w-full py-16 md:py-24 bg-black  overflow-hidden">
+   <img class="absolute inset-0 w-full h-full  object-cover opacity-20" src="{% static 'images/portfolio.webp' %}" alt=""Portfolio Background"">
+  <div class="relative z-10 max-w-4xl mx-auto text-center px-4 md:px-6">
+    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+      Ozbix Folio
+    </h1>
+    <p class="mt-6 text-base md:text-lg text-gray-300 leading-7 md:leading-8">
+      With over 70 successful projects completed, we have a proven track
+      record of delivering excellence. Our expertise and dedication ensure
+      that each project is completed to the highest standard, exceeding
+      client expectations.
+    </p>
+  </div>
+</section>
+
+  <!-- ============= ozbix images =============== -->
+
+  <section class="relative  py-20 overflow-hidden">
+    <img class="absolute inset-0 w-full h-full object-cover opacity-80" src="{% static 'images/portfolio.webp' %}" alt="">
+  <div class="absolute inset-0 bg-black/70"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+    <!--=== Portfolio Grid ===-->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-16">
+
+    {% comment %} ==== cards ===== {% endcomment %}
+
+     {% for folio in ozbix_folios %}
+ <div class="cards text-center">
+    <img src="{{ folio.image.url }}"
+         alt="{{ folio.title }}"
+         class="rounded-xl w-full h-64 object-cover hover:scale-105 transition duration-300">
+
+    <h3 class="text-white text-xl mt-4 font-medium">
+        {{ folio.title }}
+    </h3>
+ </div>
+    {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!--=============================== About us ====================================  -->
+
+<section class="relative max-w-7xl mx-auto px-8 py-16">
+ <img class="absolute inset-0 w-full h-full opacity-20"  src="{% static 'images/About_software_bg_img (1).webp' %}" alt="">
+  <div class="flex flex-col lg:flex-row items-center gap-12">
+   <img src="{% static 'images/image-copy.webp' %}" alt="">
+
+    
+    <!--== Right Side Content ==-->
+    <div class="lg:w-1/2">
+      <h4 class="text-red-700 text-7xl font-bold mb-8">
+        <img src="{% static 'images/heading_icon_img.webp' %}" alt="">
+        About Us
+      </h4>
+
+      <h2 class="text-3xl font-bold mb-4">
+        Our Success Secret
+      </h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-semibold text-red-700">
+            Commitment to Quality
+          </h3>
+          <p class="text-gray-600 mt-2">
+            We prioritize excellence in every aspect of our work, ensuring high standards of quality.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold text-red-700">
+            Innovation at the Core
+          </h3>
+          <p class="text-gray-600 mt-2">
+            Embracing innovation fuels creativity and helps us stay ahead.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold text-red-700">
+            Customer-Centric Approach
+          </h3>
+          <p class="text-gray-600 mt-2">
+            We understand our clients' needs and deliver tailored solutions.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!--=============================  Our clients  =================================== -->
+
+<section class="container mx-auto w-full bg-black px-4 md:px-6 lg:px-20 py-10">
+  <div class="ml-0 lg:ml-20">
+    <h2 class="text-3xl md:text-4xl text-red-700 font-bold px-0 lg:px-20 py-5">
+       Our clients
+    </h2>
+    <p class="text-lg md:text-2xl text-white px-0 lg:px-20 font-semibold mb-6">
+       We work with start-up businesses through to global <br class="hidden md:block">
+       organisations.
+    </p>
+  </div>
+
+  <div class="bg-black py-10 overflow-hidden">
+
+    <!--========== Row 1 ========== -->
+
+    <div class="flex gap-4 md:gap-8 justify-center animate-slide w-max mb-8">
+
+      {% for client in clients %}
+        <div class="bg-white rounded-2xl w-56 md:w-70 h-32 md:h-40 flex items-center justify-center">
+          <img src="{{ client.image.url }}" 
+            class="max-h-24 md:max-h-40 object-contain" 
+              alt="Client Logo">
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</section>
+<!-- =========================== Customers rewview ============================ -->
+
+<section>
+ <div>
+   <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold py-2 text-center mt-10">Our Customers Reviews</h1>
+   <p class="text-gray-800 text-center text-sm md:text-base">Hear What Our Customers Have to Say.</p>
+     <div class="flex flex-col lg:flex-row items-center gap-4 bg-white p-6 rounded-lg w-full lg:w-fit">
+  <div class="py-20 bg-gray-50 ml-0 lg:ml-36">
+    <div class="max-w-7xl mx-auto px-5">
+
+            <!-- Left Rating -->
+            <div class="text-center lg:text-left">
+
+                <img src="{% static 'images/Favicon-5.webp' %}" 
+                    class="w-20 mx-auto lg:mx-0 mb-4" alt="">
+
+                <h2 class="text-3xl font-bold text-gray-900">
+                    4.9 ⭐⭐⭐⭐⭐
+                </h2>
+
+                <p class="text-gray-500 mt-2">
+                    Based on 62 Reviews
+                </p>
+
+            </div>
+
+            <!-- Right Testimonials -->
+            <div class="lg:col-span-3 mt-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+
+                    <!-- Card -->
+                    <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="{% static 'images/HF_-_LOGO_NEW (2).webp' %}"
+                                class="w-16 h-8 ">
+
+                            <div>
+                                <h3 class="font-semibold ml-2">
+                                    Arsalan Akhtar
+                                </h3>
+
+                                <p class="text-sm text-gray-500 ml-2">
+                                    CEO of Harmain Foods
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-red-500 text-lg mb-3">
+                            ★★★★★
+                        </div>
+
+                        <p class="text-gray-600 leading-7">
+                            Ozbix delivered an outstanding solution with
+                            excellent communication and timely delivery.
+                            Highly recommended for professional web
+                            development services.
+                        </p>
+                    </div>
+
+                    <!-- Card -->
+
+                    <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="{% static 'images/10.webp' %}"
+                                class="w-12 h-12 rounded-full object-cover">
+
+                            <div>
+                                <h3 class="font-semibold">
+                                    Usama Poochi
+                                </h3>
+
+                                <p class="text-sm text-gray-500">
+                                    Business Owner
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-red-500 text-lg mb-3">
+                            ★★★★★
+                        </div>
+
+                        <p class="text-gray-600 leading-7">
+                            The team created a scalable platform that
+                            improved our workflow and increased user
+                            engagement significantly.
+                        </p>
+                    </div>
+
+                    <!-- Card -->
+
+                    <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="{% static 'images/19-1.webp'%}"
+                                class="w-12 h-12 rounded-full object-cover">
+
+                            <div>
+                                <h3 class="font-semibold">
+                                    Bilal Mehar
+                                </h3>
+
+                                <p class="text-sm text-gray-500">
+                                    Founder
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="text-red-500 text-lg mb-3">
+                            ★★★★★
+                        </div>
+
+                        <p class="text-gray-600 leading-7">
+                            Ozbix exceeded expectations with quality work,
+                            responsive support and excellent project
+                            management.
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<hr>
+<!-- ================================ Work With Global ============================== -->
+
+<section class="py-10">
+    <div class="flex justify-center">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+            We Work With Global Partners
+        </h1>
+    </div>
+    <p class="flex justify-center py-6 text-gray-700 text-center px-4">
+        Connecting with the Best, Worldwide
+    </p>
+    <div class="px-4 sm:px-8 lg:px-20 flex flex-wrap justify-center gap-6">
+      <img src="{% static 'images/1 (1).webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+      <img src="{% static 'images/2 (1).webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+      <img src="{% static 'images/3.webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+      <img src="{% static 'images/4 (1).webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+      <img src="{% static 'images/6-6.webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+      <img src="{% static 'images/5 (1).webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+      <img src="{% static 'images/8-2.webp' %}" class="h-12 sm:h-16 lg:h-20 w-auto" alt="">
+    </div>
+</section>
+<!-- =========================== Our technology stack ================================ -->
+
+<section class="bg-[#181818] text-white py-12 sm:py-16 lg:py-20 mt-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-red-600 uppercase mb-6 flex items-center gap-3 sm:gap-4">
+      <span class="text-2xl sm:text-4xl">≡</span>
+      Our Technology Stack
+    </h2>
+
+    <p class="text-gray-300 max-w-5xl leading-7 sm:leading-8 mb-10 lg:mb-14 text-sm sm:text-base">
+      Crafting software requires a blend of expertise and acumen. Every developer
+      knows the pivotal role that the choice of technology stack plays in shaping
+      a solution. Below is an inventory of programming languages, frameworks,
+      databases and platforms our IT firm specializes in.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+
+      <!-- Left Menu -->
+      <div class="lg:col-span-3 lg:border-r border-gray-600">
+
+        <div class="py-4 border-b border-gray-600 text-red-600 font-semibold uppercase cursor-pointer text-sm sm:text-base">
+          Programming Languages
+        </div>
+
+        <div class="py-4 border-b border-gray-600 hover:text-red-500 cursor-pointer uppercase text-sm sm:text-base">
+          Web Frameworks
+        </div>
+
+        <div class="py-4 border-b border-gray-600 hover:text-red-500 cursor-pointer uppercase text-sm sm:text-base">
+          Other Platforms
+        </div>
+
+        <div class="py-4 hover:text-red-500 cursor-pointer uppercase text-sm sm:text-base">
+          CMS Platforms
+        </div>
+
+      </div>
+
+      <!--=========== Right Icons =========== -->
+
+      <div class="lg:col-span-9">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 lg:gap-10 text-center">
+
+          <div class="group">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 duration-300">
+             <img src="{% static 'images/ts-javascript.svg' %}"class="w-12 sm:w-16 lg:w-20"  alt="">
+            </div>
+            <p class="mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl">JavaScript</p>
+          </div>
+
+          <div class="group">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 duration-300">
+              <img src="{% static 'images/ico_python.svg' %}"class="w-12 sm:w-16 lg:w-20" alt="">
+            </div>
+            <p class="mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl">Python</p>
+          </div>
+
+          <div class="group">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 duration-300">
+              <img src="{% static 'images/ico_php.svg' %}" class="w-12 sm:w-16 lg:w-20" alt="">
+            </div>
+            <p class="mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl">PHP</p>
+          </div>
+
+          <div class="group">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 duration-300">
+              <img src="{% static 'images/ico_swift.svg '%}" class="w-12 sm:w-16 lg:w-20 " alt="">
+            </div>
+            <p class="mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl">Swift</p>
+          </div>
+
+          <div class="group">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 duration-300">
+              <img src="{% static 'images/ico_csharp.svg' %}" class="w-12 sm:w-16 lg:w-20" alt="">
+            </div>
+            <p class="mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl">C#</p>
+          </div>
+
+          <div class="group">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 duration-300">
+              <img src="{% static 'images/ico_kotlin.svg' %}" class="w-12 sm:w-16 lg:w-20" alt="">
+            </div>
+            <p class="mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl">Kotlin</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- =============================  Your Support Experience ============================= -->
+
+<section class="bg-[#f8f1ee] py-10 sm:py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+            <!-- ===== Left Side ===== -->
+
+            <div class="w-full max-w-md lg:w-[430px] bg-white shadow-lg p-4 rounded-lg lg:ml-20 lg:mb-20">
+                <div class="space-y-4">
+                    <div class="flex justify-start">
+                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
+                            <p class="font-semibold">Hi! Sure</p>
+                            <p class="mt-2 text-gray-700 text-sm sm:text-base">
+                                We offer website development and digital marketing.
+                                What do you need?
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <div class="bg-red-700 text-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
+                            <p class="text-sm sm:text-base">
+                                Hi, I want to know about your services.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-start">
+                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
+                            <p class="font-semibold">Great to hear!</p>
+                            <p class="mt-2 text-gray-700 text-sm sm:text-base">
+                                We offer website development and digital marketing.
+                                What do you need?
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <div class="bg-red-700 text-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
+                            <p class="text-sm sm:text-base">
+                                You're welcome! Let me know if you need more information.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-start">
+                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
+                            <p class="text-sm sm:text-base">
+                                Okay, I'll check the website. Your response has been very helpful.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Right Side ===== -->
+
+            <div class="flex-1 w-full">
+
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-8 lg:mb-12 text-center lg:text-left">
+                    Elevate Your Support Experience with Expert Assistance.
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Card 1 -->
+                    <div class="border rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-white to-red-100">
+                        <img src="images/watch.webp" class="w-10 sm:w-12 mb-6" alt="">
+                        <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">90s</h3>
+                        <p>Average Response Time</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="border rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-white to-red-100">
+                        <img src="images/icon10.webp" class="w-10 sm:w-12 mb-6" alt="">
+                        <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">96%</h3>
+                        <p>Client Satisfaction Score</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="border rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-white to-red-100">
+                        <img src="images/avatar.webp" class="w-10 sm:w-12 mb-6" alt="">
+                        <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">24/7</h3>
+                        <p>Ozbix Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--  ======================== Location ======================== -->
+
+
+<section class="py-20 bg-[#1f1f1f]">
+    <div
+        class="max-w-7xl mx-auto px-10 py-20 rounded-full bg-cover bg-center bg-no-repeat"
+        style="background-image: url('images/Location_bg_img.webp');">
+        <div class="text-center mb-16">
+            <img src="{% static 'images/heading_icon_img (1).webp' %}" class="mx-auto mb-4 w-14">
+            <h2 class="text-5xl font-bold text-white">
+                Location
+            </h2>
+        </div>
+
+        <!-- Locations -->
+        <div class="grid md:grid-cols-3 text-center">
+            <div class="border-r border-gray-500">
+                <img src="{% static 'images/loc_pak.webp' %}" class="mx-auto h-20 mb-6">
+                <h3 class="text-white text-3xl font-bold">
+                    Pakistan
+                </h3>
+                <p class="text-white text-2xl font-semibold mt-3">
+                    (021)32226060
+                </p>
+            </div>
+
+            <!-- UAE -->
+            <div class="border-r border-gray-500">
+                <img src="{% static 'images/Loc_dubai2.webp' %}" class="mx-auto h-20 mb-6">
+                <h3 class="text-white text-3xl font-bold">
+                    U.A.E
+                </h3>
+                <p class="text-white text-2xl font-semibold mt-3">
+                    +971-508312016
+                </p>
+            </div>
+
+            <!-- Australia -->
+            <div>
+                <img src="{% static 'images/loc_aus.webp' %}" class="mx-auto h-20 mb-6">
+                <h3 class="text-white text-3xl font-bold">
+                    Australia
+                </h3>
+                <p class="text-white text-2xl font-semibold mt-3">
+                    +614-69389357
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== section =============================  -->
+
+<section class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <p class="uppercase text-black font-semibold tracking-wider text-lg">
+      Looking For A International IT Solution Agency?
+    </p>
+    <h2 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-black">
+      We Strive to Understand Your Goals <br>
+      & Boost Your Success
+    </h2>
+
+   <!--=== Button ===-->
+<button onclick="modal.classList.remove('hidden')"
+  class="bg-red-700 font-bold text-white shadow-2xl shadow-red-600 px-6 py-3 mt-12 w-48 rounded-full">
+  Let's Talk
+</button>
+
+<div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white w-full max-w-3xl rounded-xl p-6 relative">
+    
+    <button onclick="modal.classList.add('hidden')"
+      class="absolute top-4 right-5 text-3xl">&times;</button>
+
+    <h2 class="text-4xl font-bold text-center text-red-700 mb-6">
+      Let's Talk With Us
+    </h2>
+
+    <form class="space-y-4">
+
+      <input type="text" placeholder="Full Name"
+        class="w-full border p-3 rounded">
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <input type="email" placeholder="Your Email"
+          class="border p-3 rounded">
+        <input type="text" placeholder="Your Number"
+          class="border p-3 rounded">
+      </div>
+
+      <div>
+        <p class="font-semibold mb-2">Choose Services</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+          <label><input type="checkbox"> Marketing</label>
+          <label><input type="checkbox"> Graphic Design</label>
+          <label><input type="checkbox"> Website Development</label>
+          <label><input type="checkbox"> SEO</label>
+          <label><input type="checkbox"> Product Photography</label>
+          <label><input type="checkbox"> Software Development</label>
+          <label><input type="checkbox"> Other</label>
+        </div>
+      </div>
+
+      <textarea rows="5" placeholder="Type your message"
+        class="w-full border p-3 rounded"></textarea>
+
+      <div class="border rounded p-4 w-72 flex items-center gap-3">
+        <input type="checkbox" class="w-5 h-5">
+        <span>I'm not a robot</span>
+      </div>
+
+      <button
+        class="w-full bg-red-700 text-white py-3 rounded font-bold hover:bg-red-800">
+        SEND MESSAGE
+      </button>
+
+    </form>
+
+  </div>
+</div>
+</section>
+
+<!-- ============================== Footer =============================== -->
+
+<footer class="relative bg-[#1f1b1b] text-white overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-96 h-96 bg-red-700 rounded-full blur-[120px] opacity-30"></div>
+    <div class="absolute -bottom-40 -left-40 w-[450px] h-[450px] bg-red-700 rounded-full blur-[150px] opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+
+        <!-- ========== First Row ============ -->
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-14">
+
+            <!-- =========== Logo =========== -->
+            <div>
+                <img class="w-72 mb-6" src="{% static 'images/oz-logo.webp' %}" alt="Logo">
+                <p class="text-gray-300 leading-8">
+                    Ozbix Development House is Pakistan,
+                    Australian and Dubai based company that
+                    can work with professional team and
+                    always gives customer a great service.
+                </p>
+            </div>
+
+            <!--============== Graphic ============= -->
+            
+            <div>
+                <h2 class="text-4xl font-bold mb-8">
+                    Graphic Design
+                </h2>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="hover:text-red-500 cursor-pointer">Logo Design</li>
+                    <li class="hover:text-red-500 cursor-pointer">Cloth Design</li>
+                    <li class="hover:text-red-500 cursor-pointer">Social Media Post Design</li>
+                    <li class="hover:text-red-500 cursor-pointer">Business Stationary</li>
+                    <li class="hover:text-red-500 cursor-pointer">Website Design</li>
+                    <li class="hover:text-red-500 cursor-pointer">Products Design</li>
+                </ul>
+            </div>
+
+            <!--================ Marketing ==================-->
+
+            <div>
+                <h2 class="text-4xl font-bold mb-8">
+                    Digital Marketing
+                </h2>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="hover:text-red-500 cursor-pointer">Digital Marketing</li>
+                    <li class="hover:text-red-500 cursor-pointer">Social Media Marketing</li>
+                    <li class="hover:text-red-500 cursor-pointer">Email Marketing</li>
+                    <li class="hover:text-red-500 cursor-pointer">Pay Per Click (PPC)</li>
+                    <li class="hover:text-red-500 cursor-pointer">Content Writing</li>
+                </ul>
+            </div>
+
+            <!-- =============== SEO ================ -->
+
+            <div>
+
+                <h2 class="text-4xl font-bold mb-8">
+                    SEO
+                </h2>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="hover:text-red-500 cursor-pointer">On Page SEO</li>
+                    <li class="hover:text-red-500 cursor-pointer">Off Page SEO</li>
+                    <li class="hover:text-red-500 cursor-pointer">WordPress SEO</li>
+                    <li class="hover:text-red-500 cursor-pointer">Shopify SEO</li>
+                    <li class="hover:text-red-500 cursor-pointer">Magento SEO</li>
+                    <li class="hover:text-red-500 cursor-pointer">E-Commerce SEO</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!--================ Second Row ==================== -->
+
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-14 mt-20">
+
+            <!--====== Website ========= -->
+
+            <div>
+                <h2 class="text-4xl font-bold mb-8">
+                    Website
+                </h2>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="hover:text-red-500 cursor-pointer">E-Commerce Website</li>
+                    <li class="hover:text-red-500 cursor-pointer">WordPress Website</li>
+                    <li class="hover:text-red-500 cursor-pointer">Shopify Website</li>
+                    <li class="hover:text-red-500 cursor-pointer">Website Development</li>
+                </ul>
+            </div>
+
+            <!-- ============= Other ============== -->
+
+            <div>
+                <h2 class="text-4xl font-bold mb-8">
+                    Other Service
+                </h2>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="hover:text-red-500 cursor-pointer">Software Development</li>
+                    <li class="hover:text-red-500 cursor-pointer">Mobile App Development</li>
+                    <li class="hover:text-red-500 cursor-pointer">Domain & Hosting</li>
+                    <li class="hover:text-red-500 cursor-pointer">Graphic Designing</li>
+                    <li class="hover:text-red-500 cursor-pointer">Photography</li>
+                </ul>
+            </div>
+
+            <!--======== Explore ============ -->
+
+            <div>
+                <h2 class="text-4xl font-bold mb-8">
+                    Explore
+                </h2>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="hover:text-red-500 cursor-pointer">About</li>
+                    <li class="hover:text-red-500 cursor-pointer">CEO Message</li>
+                    <li class="hover:text-red-500 cursor-pointer">Vision & Mission</li>
+                    <li class="hover:text-red-500 cursor-pointer">Portfolio</li>
+                    <li class="hover:text-red-500 cursor-pointer">Contact Us</li>
+                    <li class="hover:text-red-500 cursor-pointer">Careers</li>
+                </ul>
+            </div>
+
+            <!-- ============ Contact ============ -->
+
+            <div>
+                <h2 class="text-4xl font-bold mb-8">
+                    Contact Us
+                </h2>
+                <div class="space-y-5 text-gray-300">
+                    <p><strong>Pakistan:</strong> +92 311 456 324</p>
+                    <p><strong>UAE:</strong> +971 50 831 2016</p>
+                    <p><strong>Australia:</strong> +61 469 389 357</p>
+                    <p>
+                        <i class="fa-solid fa-envelope mr-2"></i>
+                        info@ozbix.com
+                    </p>
+
+                    <hr class="border-gray-600">
+
+                    <p>
+                        <i class="fa-solid fa-phone mr-2"></i>
+                        +92 213 2226060
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-envelope mr-2"></i>
+                        hr@ozbix.com
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+
+<script>
+const swiper = new Swiper(".myServices", {
+    loop: true,
+    speed: 900,
+    spaceBetween: 25,
+
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+
+    breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        640: {
+            slidesPerView: 2,
+        },
+        1024: {
+            slidesPerView: 3,
+        },
+        1400: {
+            slidesPerView: 4,
+        },
+    },
+});
+</script>
+
+</body>
+</html>

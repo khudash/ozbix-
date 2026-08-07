@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Portfolio
+{% endblock %}
+
+{% block content %}
+   <section class="py-12 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold text-red-800">Our Portfolio</h2>
+
+      <p class="max-w-2xl mx-auto mt-2 text-gray-600">
+       Explore Ozbix portfolio showcasing tailored solutions designed for optimal
+       performance and seamless integration.
+      </p>
+
+     <div class="flex flex-wrap justify-center gap-3 mt-8">
+       <button class="px-5 py-2 rounded-lg bg-red-700 text-white font-semibold">WEBSITES</button>
+       <button class="px-5 py-2 rounded-lg border">LOGO DESIGN</button>
+       <button class="px-5 py-2 rounded-lg border">SOCIAL MEDIA</button>
+       <button class="px-5 py-2 rounded-lg border">BUSINESS CARDS</button>
+       <button class="px-5 py-2 rounded-lg border">PHOTOGRAPHY</button>
+       <button class="px-5 py-2 rounded-lg border">PRINT DESIGN</button>
+     </div>
+
+      <hr class="my-8 border-black">
+
+     <div class="inline-flex p-2 border-2 border-black rounded-full gap-2">
+        <button class="px-5 py-2 rounded-full bg-gray-900 text-white font-semibold">All Websites</button>
+        <button class="px-5 py-2 rounded-full bg-white hover:bg-gray-100">E-Commerce</button>
+        <button class="px-5 py-2 rounded-full bg-white hover:bg-gray-100">Static Website</button>
+     </div>
+   </section>
+
+    <!--======= Cards ==========-->
+     <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
+
+       <!-- Card 1 -->
+      <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="h-80 overflow-hidden">
+            <img src="images/Portfolio kleeyo.webp"
+                 class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+        </div>
+        <h3 class="py-4 text-xl font-bold text-center">Kleeyo</h3>
+      </div>
+
+        <!-- Card 2 -->
+      <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+            <img src="images/portfolio count.webp"
+                 class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+           <h3 class="py-4 text-xl font-bold text-center">Count On Crops</h3>
+      </div>
+
+         <!-- Card 3 -->
+         <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+              <img src="images/portfolio beauty.webp"
+                   class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+          <h3 class="py-4 text-xl font-bold text-center">Syca Beauty</h3>
+         </div>
+
+      <!-- Card 4 -->
+        <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+              <img src="images/portfolio Zakra Beads.webp"
+                   class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+          <h3 class="py-4 text-xl font-bold text-center">Zakra Beads</h3>
+        </div>
+
+      <!-- Card 5 -->
+      <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="h-80 overflow-hidden">
+            <img src="images/portfolio shoes.webp"
+                 class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+        </div>
+        <h3 class="py-4 text-xl font-bold text-center">Archiver Shoes</h3>
+      </div>
+
+        <!-- Card 6 -->
+      <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+            <img src="images/portfolio Miyaar studio.webp"
+                 class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+                 <h3 class="py-4 text-xl font-bold text-center">Miyaar studio</h3>
+      </div>
+
+         <!-- Card 7 -->
+         <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+              <img src="images/shopify style.webp"
+                   class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+          <h3 class="py-4 text-xl font-bold text-center">Elodora</h3>
+         </div>
+
+      <!-- Card 8 -->
+        <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+              <img src="images/shopify new arrivals.webp"
+                   class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+          <h3 class="py-4 text-xl font-bold text-center">BAGGO</h3>
+        </div>
+
+        
+         <!-- Card 9 -->
+     <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="h-80 overflow-hidden">
+        <img src="images/ecombie.webp"
+                 class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+        </div>
+        <h3 class="py-4 text-xl font-bold text-center">ECOMBIE</h3>
+      </div>
+
+        <!-- Card 10 -->
+      <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="h-80 overflow-hidden">
+            <img src="images/gbc.webp"
+                 class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+        </div>
+        <h3 class="py-4 text-xl font-bold text-center">GBC</h3>
+      </div>
+
+         <!-- Card 11 -->
+         <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+              <img src="images/orocx.webp"
+                   class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+          <h3 class="py-4 text-xl font-bold text-center">OROCX</h3>
+         </div>
+
+      <!-- Card 12 -->
+        <div class="group w-64 mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-80 overflow-hidden">
+               <img src="images/maymaarengineering.webp"
+                   class="w-full transition-transform duration-[8000ms] ease-linear group-hover:-translate-y-[65%]">
+          </div>
+          <h3 class="py-4 text-xl font-bold text-center">MAYMAARENGINEERING</h3>
+        </div>
+
+     </div>
+   </div>
+
+   
+<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

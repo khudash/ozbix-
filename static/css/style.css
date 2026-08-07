@@ -1,0 +1,72 @@
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-20%);
+    }
+}
+@keyframes slideReverse {
+    from {
+        transform: translateX(-30%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.animate-slide {
+    animation: slide 15s linear infinite;
+}
+
+.animate-slide-reverse {
+    animation: slideReverse 15s linear infinite;
+}
+
+.group:hover img{
+    transform: translateY(-65%);
+}
+
+
+
+
+
+@media (max-width: 1199px) {
+    .navbar {
+        display: none !important;
+    }
+
+    .menu-btn {
+        display: block !important;
+    }
+}
+
+
+/*=== Desktop ===*/
+.cards{
+    width: 250px;
+}
+
+/* Laptop */
+@media (max-width: 1366px){
+    .cards{
+        width: 220px;
+        margin-left: 20px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px){
+    .cards{
+        width: 190px;
+        margin-left: 15px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px){
+    .cards{
+        width: 100%;
+        margin-left: 0;
+    }
+}
