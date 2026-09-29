@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Search Engine Optimization (SEO) Services - Ozbix IT Solutions
+{% endblock %}
+
+{% block content %}
+<!-- ================= HERO SECTION ================= -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+            <span class="bg-red-100 text-red-700 text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wider">
+                Top #1 Rank Optimization
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-4 text-gray-900">
+                Dominate Google Rankings With <span class="text-red-700">Expert SEO</span>
+            </h1>
+            <p class="text-gray-600 text-lg mt-6 leading-relaxed">
+                Rank higher, attract organic traffic, and convert visitors into long-term clients with our comprehensive On-Page, Off-Page, Technical, and E-Commerce SEO solutions.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-8">
+                <a href="{% url 'home' %}#contact" class="bg-red-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition duration-300 shadow-lg shadow-red-200">
+                    CLAIM YOUR FREE SEO AUDIT
+                </a>
+                <a href="#seo-features" class="border-2 border-gray-300 text-gray-800 px-8 py-4 rounded-xl font-bold hover:border-red-700 hover:text-red-700 transition duration-300">
+                    VIEW SEO PACKAGES
+                </a>
+            </div>
+        </div>
+        <div class="lg:w-1/2 flex justify-center">
+            <div class="relative w-full max-w-lg">
+                <div class="bg-gradient-to-br from-black via-gray-900 to-red-900 text-white p-8 rounded-3xl shadow-2xl border border-red-700">
+                    <div class="flex items-center gap-4 mb-6 border-b border-gray-800 pb-4">
+                        <div class="w-12 h-12 bg-red-700 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-magnifying-glass text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Search Ranking Snapshot</h3>
+                            <p class="text-xs text-gray-400">Google Search Engine Results Page (SERP)</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-gray-800/80 p-4 rounded-xl border border-green-500/40">
+                            <div class="flex items-center justify-between font-semibold text-green-400">
+                                <span>#1 Rank - Main Business Keyword</span>
+                                <span class="bg-green-900/60 px-2 py-1 rounded text-xs">Top Result</span>
+                            </div>
+                            <p class="text-xs text-gray-300 mt-1">https://yourwebsite.com/services</p>
+                        </div>
+                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                            <div class="flex items-center justify-between font-semibold text-gray-200">
+                                <span>Organic Clicks Growth</span>
+                                <span class="text-red-400 font-bold">+480%</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">First Page Indexing across 85+ Keywords</p>
+                        </div>
+                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                            <div class="flex items-center justify-between font-semibold text-gray-200">
+                                <span>Domain Authority (DA)</span>
+                                <span class="text-yellow-400 font-bold">Score 68/100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SEO SERVICES GRID ================= -->
+<section id="seo-features" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900">
+                Our Strategic <span class="text-red-700">SEO Solutions</span>
+            </h2>
+            <p class="text-gray-600 text-lg mt-4">
+                We combine technical optimization, search intent research, and white-hat link building to secure sustainable search engine rankings.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">On-Page SEO</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Meta tags optimization, header structures, keyword placement, schema markup & high-quality content structure.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Off-Page & Link Building</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    High DA authority backlinks, guest blogging, PR placement, & brand outreach to build search authority.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Technical SEO</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Core Web Vitals tuning, page speed optimization, sitemap indexation, canonical links, & crawlability audits.
+                </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Local SEO & Google Profile</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Google Business Profile optimization, local citations, map pack ranking, & geo-targeted local keywords.
+                </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">E-Commerce SEO</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Shopify, WordPress & WooCommerce product page optimization, category structure, and product schema tags.
+                </p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-14 h-14 bg-red-100 text-red-700 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Keyword Strategy</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Deep competitor keyword analysis, high-intent transactional search terms, and long-tail keyword mapping.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA BANNER ================= -->
+<section class="bg-red-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold">Outrank Your Competitors On Google Today</h2>
+        <p class="text-red-100 text-lg mt-4 max-w-2xl mx-auto">
+            Get a comprehensive 30-point SEO audit report detailing your site's health, ranking opportunities, and competitor strategies.
+        </p>
+        <a href="{% url 'home' %}#contact" class="inline-block mt-8 bg-black hover:bg-gray-900 text-white px-10 py-4 rounded-xl font-bold transition duration-300 shadow-2xl">
+            GET FREE SEO CONSULTATION →
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Digital Marketing Services - Ozbix IT Solutions
+{% endblock %}
+
+{% block content %}
+<!-- ================= HERO SECTION ================= -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+            <span class="bg-red-100 text-red-700 text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wider">
+                Digital Marketing Experts
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-4 text-gray-900">
+                Data-Driven <br><span class="text-red-700">Digital Marketing</span> Solutions
+            </h1>
+            <p class="text-gray-600 text-lg mt-6 leading-relaxed">
+                Accelerate your business growth with targeted marketing campaigns, search visibility, high-converting social ads, and personalized brand strategies designed to maximize your ROI.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-8">
+                <a href="{% url 'home' %}#contact" class="bg-red-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition duration-300 shadow-lg shadow-red-200">
+                    START YOUR CAMPAIGN
+                </a>
+                <a href="#services" class="border-2 border-gray-300 text-gray-800 px-8 py-4 rounded-xl font-bold hover:border-red-700 hover:text-red-700 transition duration-300">
+                    EXPLORE SERVICES
+                </a>
+            </div>
+        </div>
+        <div class="lg:w-1/2 flex justify-center">
+            <div class="relative w-full max-w-lg">
+                <div class="absolute -top-4 -left-4 w-72 h-72 bg-red-200 rounded-full blur-3xl opacity-50"></div>
+                <div class="bg-gradient-to-tr from-gray-900 to-red-900 text-white p-8 rounded-3xl shadow-2xl relative z-10 border border-red-800">
+                    <div class="flex items-center justify-between mb-8">
+                        <span class="text-xl font-bold">Campaign Performance</span>
+                        <i class="fa-solid fa-chart-line text-3xl text-red-500"></i>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Conversion Rate</span>
+                                <span class="font-bold text-green-400">+145%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3">
+                                <div class="bg-green-500 h-3 rounded-full w-[85%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Organic Traffic Growth</span>
+                                <span class="font-bold text-red-400">+310%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3">
+                                <div class="bg-red-600 h-3 rounded-full w-[92%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Social Media Reach</span>
+                                <span class="font-bold text-yellow-400">2.4M Views</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3">
+                                <div class="bg-yellow-500 h-3 rounded-full w-[78%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CORE MARKETING SERVICES ================= -->
+<section id="services" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900">
+                Complete Digital Marketing <span class="text-red-700">Services</span>
+            </h2>
+            <p class="text-gray-600 text-lg mt-4">
+                We craft tailored digital marketing strategies designed to convert visitors into loyal, long-term customers.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-700 transition duration-300">
+                    <i class="fa-solid fa-bullhorn text-3xl text-red-700 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Social Media Marketing</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Targeted ad campaigns & organic content strategy across Facebook, Instagram, LinkedIn, TikTok & X.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Audience Targeting</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Creative Ad Design</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Community Management</li>
+                </ul>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-700 transition duration-300">
+                    <i class="fa-solid fa-rectangle-ad text-3xl text-red-700 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Pay-Per-Click (PPC)</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Google Ads, Shopping Ads, & Meta Ad campaigns optimized for high click-through rates & sales conversion.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Keyword Bidding</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> A/B Testing</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> ROI Reporting</li>
+                </ul>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-700 transition duration-300">
+                    <i class="fa-solid fa-envelope-open-text text-3xl text-red-700 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Email & Funnel Marketing</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Automated email workflows, newsletters, and high-converting sales funnels to nurture leads.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Drip Campaigns</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Lead Magnet Strategy</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Customer Retention</li>
+                </ul>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-700 transition duration-300">
+                    <i class="fa-solid fa-pen-nib text-3xl text-red-700 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Content Marketing</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Engaging blog posts, press releases, copy, and visual stories that position your brand as an industry leader.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> SEO Copywriting</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Editorial Calendars</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Infographics & Media</li>
+                </ul>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-700 transition duration-300">
+                    <i class="fa-solid fa-users text-3xl text-red-700 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Influencer Marketing</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Connect with key niche influencers to amplify your reach and build instant brand credibility.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Niche Outreach</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Campaign Tracking</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Product Placement</li>
+                </ul>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-700 transition duration-300">
+                    <i class="fa-solid fa-magnifying-glass-chart text-3xl text-red-700 group-hover:text-white transition duration-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Analytics & Growth Strategy</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    In-depth market research, customer profiling, performance metrics & transparent reporting.
+                </p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Conversion Rate Optimization</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Custom Dashboards</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-red-600"></i> Competitor Analysis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA BANNER ================= -->
+<section class="bg-gradient-to-r from-black via-gray-900 to-red-950 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold">Ready to Boost Your Sales & Online Visibility?</h2>
+        <p class="text-gray-300 text-lg mt-4 max-w-2xl mx-auto">
+            Contact Ozbix digital marketing strategists today for a free audit and customized strategy session.
+        </p>
+        <a href="{% url 'home' %}#contact" class="inline-block mt-8 bg-red-700 hover:bg-red-600 text-white px-10 py-4 rounded-xl font-bold transition duration-300 shadow-xl">
+            GET FREE MARKETING AUDIT →
+        </a>
+    </div>
+</section>
+{% endblock %}

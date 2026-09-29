@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Software & App Development Services - Ozbix IT Solutions
+{% endblock %}
+
+{% block content %}
+<!-- ================= HERO SECTION ================= -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+            <span class="bg-red-100 text-red-700 text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wider">
+                Enterprise Software Development
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-4 text-gray-900">
+                Custom <span class="text-red-700">Software & Mobile App</span> Solutions
+            </h1>
+            <p class="text-gray-600 text-lg mt-6 leading-relaxed">
+                We design, build, and deploy scalable enterprise software, web applications, SaaS platforms, and high-performance native/cross-platform mobile applications.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-8">
+                <a href="{% url 'home' %}#contact" class="bg-red-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition duration-300 shadow-lg shadow-red-200">
+                    DISCUSS YOUR PROJECT
+                </a>
+                <a href="#software-stack" class="border-2 border-gray-300 text-gray-800 px-8 py-4 rounded-xl font-bold hover:border-red-700 hover:text-red-700 transition duration-300">
+                    OUR TECH STACK
+                </a>
+            </div>
+        </div>
+        <div class="lg:w-1/2 flex justify-center">
+            <div class="w-full max-w-lg bg-gray-950 text-white rounded-3xl p-6 shadow-2xl border border-gray-800">
+                <div class="flex items-center gap-2 mb-4 border-b border-gray-800 pb-3">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-xs text-gray-400 ml-2 font-mono">architecture.py</span>
+                </div>
+                <pre class="text-xs font-mono text-gray-300 overflow-x-auto leading-relaxed">
+<span class="text-purple-400">class</span> <span class="text-yellow-400">EnterpriseApp</span>:
+    <span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(self):
+        self.frontend = <span class="text-green-300">"React / Next.js"</span>
+        self.backend = <span class="text-green-300">"Python / Django"</span>
+        self.mobile = <span class="text-green-300">"Flutter / React Native"</span>
+        self.cloud = <span class="text-green-300">"AWS / Docker / Kubernetes"</span>
+
+    <span class="text-purple-400">def</span> <span class="text-blue-400">deploy</span>(self):
+        <span class="text-purple-400">return</span> <span class="text-green-300">"100% Scalable, Secure & Fast"</span>
+                </pre>
+                <div class="mt-6 pt-4 border-t border-gray-800 flex justify-between items-center text-xs">
+                    <span class="text-gray-400"><i class="fa-solid fa-check-double text-green-400 mr-1"></i> CI/CD Pipeline Ready</span>
+                    <span class="text-red-400 font-mono font-bold">Ozbix Core v2.4</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SOFTWARE SERVICES GRID ================= -->
+<section id="software-stack" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900">
+                Software Engineering <span class="text-red-700">Capabilities</span>
+            </h2>
+            <p class="text-gray-600 text-lg mt-4">
+                From ideation and UI design to full-stack code architecture and cloud deployment, we deliver robust tech products.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Custom Web Application</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    High-performance web apps built using modern frameworks like Django, Node.js, React, and Vue.
+                </p>
+                <span class="text-xs font-bold uppercase bg-red-50 text-red-700 px-3 py-1 rounded-full">Full Stack</span>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Mobile App Development</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Native iOS, Android, and cross-platform Flutter/React Native mobile applications with smooth UI.
+                </p>
+                <span class="text-xs font-bold uppercase bg-red-50 text-red-700 px-3 py-1 rounded-full">iOS & Android</span>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">SaaS & Cloud Platforms</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Multi-tenant cloud architecture, subscription billing systems, and enterprise Software-as-a-Service.
+                </p>
+                <span class="text-xs font-bold uppercase bg-red-50 text-red-700 px-3 py-1 rounded-full">SaaS Solutions</span>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">REST & GraphQL APIs</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Secure, high-speed API development, microservices architecture, and third-party API integration.
+                </p>
+                <span class="text-xs font-bold uppercase bg-red-50 text-red-700 px-3 py-1 rounded-full">Microservices</span>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">AI & Automation Tools</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    AI chatbot integration, machine learning workflows, automated scrapers, & workflow bots.
+                </p>
+                <span class="text-xs font-bold uppercase bg-red-50 text-red-700 px-3 py-1 rounded-full">AI & ML</span>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Database & DevOps Setup</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    PostgreSQL, MySQL, Redis, Docker containerization, AWS/GCP deployments, & CI/CD pipelines.
+                </p>
+                <span class="text-xs font-bold uppercase bg-red-50 text-red-700 px-3 py-1 rounded-full">Cloud Infrastructure</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA BANNER ================= -->
+<section class="bg-black text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold">Turn Your Software Idea Into Reality</h2>
+        <p class="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">
+            Schedule a technical consultation with our senior software architects to get an estimated timeline & quote.
+        </p>
+        <a href="{% url 'home' %}#contact" class="inline-block mt-8 bg-red-700 hover:bg-red-600 text-white px-10 py-4 rounded-xl font-bold transition duration-300 shadow-xl">
+            BUILD YOUR SOFTWARE →
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Graphic & UI/UX Design Services - Ozbix IT Solutions
+{% endblock %}
+
+{% block content %}
+<!-- ================= HERO SECTION ================= -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+            <span class="bg-red-100 text-red-700 text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wider">
+                Creative Design Studio
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-4 text-gray-900">
+                Stunning & Memorable <span class="text-red-700">Graphic Design</span> Solutions
+            </h1>
+            <p class="text-gray-600 text-lg mt-6 leading-relaxed">
+                Elevate your brand image with custom visual identities, modern UI/UX interfaces, eye-catching marketing collateral, and high-impact social media creatives.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-8">
+                <a href="{% url 'home' %}#contact" class="bg-red-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition duration-300 shadow-lg shadow-red-200">
+                    START YOUR DESIGN PROJECT
+                </a>
+                <a href="#designs" class="border-2 border-gray-300 text-gray-800 px-8 py-4 rounded-xl font-bold hover:border-red-700 hover:text-red-700 transition duration-300">
+                    VIEW DESIGN SERVICES
+                </a>
+            </div>
+        </div>
+        <div class="lg:w-1/2 flex justify-center">
+            <div class="grid grid-cols-2 gap-4 w-full max-w-lg">
+                <div class="bg-gradient-to-br from-red-600 to-red-800 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between h-48 transform hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-paintbrush text-4xl"></i>
+                    <div>
+                        <h3 class="text-xl font-bold">Brand Identity</h3>
+                        <p class="text-xs text-red-100">Logos & Guidelines</p>
+                    </div>
+                </div>
+                <div class="bg-gray-900 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between h-48 transform hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-layer-group text-4xl text-red-500"></i>
+                    <div>
+                        <h3 class="text-xl font-bold">UI/UX Design</h3>
+                        <p class="text-xs text-gray-400">Web & App Wireframes</p>
+                    </div>
+                </div>
+                <div class="bg-gray-900 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between h-48 transform hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-hashtag text-4xl text-red-500"></i>
+                    <div>
+                        <h3 class="text-xl font-bold">Social Media</h3>
+                        <p class="text-xs text-gray-400">Post & Ad Banners</p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-red-800 to-black text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between h-48 transform hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-box text-4xl text-white"></i>
+                    <div>
+                        <h3 class="text-xl font-bold">Packaging</h3>
+                        <p class="text-xs text-red-200">Print & Label Design</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= DESIGN SERVICES SECTION ================= -->
+<section id="designs" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900">
+                Full-Spectrum <span class="text-red-700">Design Services</span>
+            </h2>
+            <p class="text-gray-600 text-lg mt-4">
+                Our expert graphic designers craft visually compelling graphics aligned with your business goals.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-red-700 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Logo & Brand Identity</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Memorable logo design, color palettes, typography, brand guidelines, and identity kits.
+                </p>
+                <span class="text-sm font-semibold text-red-700">Vector Files & Source Formats Included</span>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-red-700 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-desktop"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">UI/UX Web & App Design</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Figma prototypes, interactive wireframes, intuitive app layouts, and responsive website UI.
+                </p>
+                <span class="text-sm font-semibold text-red-700">User-Centric & Conversion Focused</span>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-red-700 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-images"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Social Media Post Design</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    High-engagement graphics, Instagram carousels, Facebook banner ads, & story templates.
+                </p>
+                <span class="text-sm font-semibold text-red-700">Tailored Niche Aesthetics</span>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-red-700 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-file-invoice"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Business Stationery</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Business cards, letterheads, envelopes, company profiles, and presentation pitch decks.
+                </p>
+                <span class="text-sm font-semibold text-red-700">Print-Ready High-Res Files</span>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-red-700 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Packaging & Label Design</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Product box packaging, bottle labels, merchandise designs, and 3D product mockups.
+                </p>
+                <span class="text-sm font-semibold text-red-700">Retail & E-Commerce Ready</span>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+                <div class="w-16 h-16 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-red-700 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3">Illustrations & Banners</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Custom vector art, website hero banners, promotional flyers, brochures, and standees.
+                </p>
+                <span class="text-sm font-semibold text-red-700">100% Unique & Original Graphics</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA BANNER ================= -->
+<section class="bg-black text-white py-16 border-t-4 border-red-700">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold">Need Custom Graphic Designs for Your Brand?</h2>
+            <p class="text-gray-400 text-base mt-2">Let our creative team craft visual identity that speaks to your audience.</p>
+        </div>
+        <a href="{% url 'home' %}#contact" class="bg-red-700 hover:bg-red-600 text-white px-8 py-4 rounded-xl font-bold transition duration-300 whitespace-nowrap shadow-xl">
+            GET A DESIGN QUOTE →
+        </a>
+    </div>
+</section>
+{% endblock %}

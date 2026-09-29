@@ -8,161 +8,414 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Document</title>
+    <title>Ozbix IT Solutions</title>
 </head>
 <body>
  
 <!--====== Navbar ======= -->
 
-<div id="navbar" class="fixed top-0 left-0 w-full z-50">
-    <div class="bg-[#ab1f2b] h-14 flex justify-between items-center px-2 md:px-4">
+<div id="navbar" class="fixed top-0 left-0 w-full z-[500] shadow-md">
+    <!-- Top Bar -->
+    <div class="bg-[#ab1f2b] h-14 flex justify-between items-center px-3 md:px-6">
         <div class="flex items-center">
-            <div class="px-2 md:px-8">
+            <div class="px-1 md:px-4">
                 <a href="{% url 'home' %}">
-                 <img src="{% static 'images/oz-logo.webp' %}" class="h-12 rounded-lg px-10" alt="">
+                 <img src="{% static 'images/oz-logo.webp' %}" class="h-10 md:h-12 rounded-lg" alt="Ozbix Logo">
                 </a>
              </div>
 
-            <div class="bg-white h-14 flex items-center px-3 md:px-8 rounded-t-lg">
-                <h2 class="text-[#ab1f2b] font-bold text-sm md:text-base">
+            <div class="bg-white h-14 flex items-center px-3 md:px-6 rounded-t-lg ml-2 md:ml-3">
+                <h2 class="text-[#ab1f2b] font-extrabold text-xs md:text-sm tracking-wider uppercase">
                     OZBIX IT SOLUTIONS
                 </h2>
             </div>
         </div>
 
-        <div class="hidden lg:flex items-center gap-5 text-white pr-8">
-            <span class="font-semibold">Follow Us |</span>
-            <i class="fa-brands fa-facebook-f"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-x-twitter"></i>
-            <i class="fa-brands fa-linkedin"></i>
+        <div class="hidden lg:flex items-center gap-4 xl:gap-5 text-white pr-4 text-sm">
+            <span class="font-medium opacity-90">Follow Us |</span>
+            <a href="#" class="hover:text-red-200 transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-red-200 transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-red-200 transition"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="hover:text-red-200 transition"><i class="fa-brands fa-linkedin"></i></a>
         </div>
     </div>
 
     <!-- ==== Bottom Navbar ===== -->
-
- <nav class="flex items-center justify-between h-16 bg-white shadow-md px-2 md:px-4">
-      <!--== wepsite ==-->
-            <div class="menu-btn">
-               <a onclick="openMenu()" class="text-2xl cursor-pointer">
-                  <i class="fa-solid fa-bars ml-4"></i>
-               </a>
-            </div>
-
-   <div id="sideMenu"
-      class="fixed top-0 left-0  h-[55%] w-[85%] md:w-[300px] bg-black/95 text-white transform -translate-x-full transition-transform duration-500 z-50">
+ <nav class="flex items-center justify-between h-16 bg-white border-b border-gray-100 px-4 md:px-8 relative">
       
-   <ul class="navbar hidden min-[1200px]:flex justify-center items-center gap-6 xl:gap-10 flex-1 font-bold"></ul>
+      <!-- Mobile Hamburger Menu Button -->
+      <div class="menu-btn min-[1200px]:hidden flex items-center">
+         <button onclick="openMenu()" class="text-2xl text-gray-800 hover:text-[#ab1f2b] transition p-1">
+            <i class="fa-solid fa-bars"></i>
+         </button>
+      </div>
 
-    <button onclick="closeMenu()"
-        class="absolute top-6 right-8 text-4xl">&times;</button>
+      <!-- Mobile Side Menu Drawer -->
+      <div id="sideMenu"
+         class="fixed top-0 left-0 h-full w-[85%] sm:w-[320px] bg-gray-950 text-white transform -translate-x-full transition-transform duration-500 z-[9999] overflow-y-auto shadow-2xl">
+         
+         <div class="flex items-center justify-between p-5 border-b border-gray-800">
+           <span class="font-extrabold text-base text-red-500 tracking-wider">OZBIX NAVIGATION</span>
+           <button onclick="closeMenu()" class="text-3xl text-gray-400 hover:text-white transition">&times;</button>
+         </div>
 
-      <!--= Menu =-->
+         <!-- Mobile Menu Links -->
+         <div class="flex flex-col py-4 px-4 space-y-1">
+           <a href="{% url 'home' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-house w-6 text-red-500"></i> Home
+           </a>
 
-   <div class="flex flex-col mt-8 px-34 ml-10">
+           <a href="{% url 'webdesign' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-laptop-code w-6 text-red-500"></i> Website Development
+           </a>
 
-        <a href="{% url 'home' %}"
-            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
-            <i class="fa-solid fa-house mr-3"></i> Home
-        </a>
+           <a href="{% url 'shopify' %}"
+               class="py-2 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-medium pl-10 text-xs text-gray-300">
+               <i class="fa-brands fa-shopify w-5 text-green-500"></i> Shopify Store
+           </a>
 
-        <a href="{% url 'shopify' %}"
-            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
-            <i class="fa-brands fa-shopify mr-3"></i> Shopify
-        </a>
+           <a href="{% url 'wordpress' %}"
+               class="py-2 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-medium pl-10 text-xs text-gray-300">
+               <i class="fa-brands fa-wordpress w-5 text-blue-400"></i> WordPress Sites
+           </a>
 
-        <a href="{% url 'wordpress' %}"
-            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
-            <i class="fa-brands fa-wordpress mr-3"></i> WordPress
-        </a>
+           <a href="{% url 'ecommerce' %}"
+               class="py-2 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-medium pl-10 text-xs text-gray-300">
+               <i class="fa-solid fa-cart-shopping w-5 text-yellow-500"></i> E-Commerce Solutions
+           </a>
 
-        <a href="{% url 'ecommerce' %}"
-            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
-            <i class="fa-solid fa-cart-shopping mr-3"></i> E-Commerce
-        </a>
+           <a href="{% url 'marketing' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-bullhorn w-6 text-red-500"></i> Marketing & Ads
+           </a>
 
-        <a href="{% url 'webdesign' %}"
-            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
-            <i class="fa-solid fa-laptop-code mr-3"></i> Web Design
-        </a>
+           <a href="{% url 'seo' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-magnifying-glass-chart w-6 text-red-500"></i> SEO Optimization
+           </a>
 
-        <a href="{% url 'portfolio' %}"
-            class="py-4 px-5 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300">
-            <i class="fa-solid fa-laptop-code mr-3"></i> portfolio
-        </a>
-    </div>
-  </div>
+           <a href="{% url 'graphic_design' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-palette w-6 text-red-500"></i> Graphic Designing
+           </a>
 
-<ul class="hidden min-[1200px]:flex justify-center gap-10 font-bold">
+           <a href="{% url 'software_services' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-code w-6 text-red-500"></i> Software Services
+           </a>
 
-          <li class="relative group cursor-pointer">
-    <span class="flex items-center gap-1">
-        WEBSITE
-        <i class="fa-solid fa-chevron-down text-xs"></i>
-    </span>
+           <a href="{% url 'other_services' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm">
+               <i class="fa-solid fa-cubes w-6 text-red-500"></i> Other Services
+           </a>
 
-    <!--============ Wepsite Menu ============-->
-   <div
-       class="absolute left-0 top-full mt-5  w-[95vw] sm:w-[90vw] md:w-[750px] lg:w-[700px] bg-white rounded-3xl shadow-2xl p-5 lg:p-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-        <div class="grid grid-cols-3 gap-8">
-            <div class="col-span-2">
-                <div class="bg-purple-100 rounded-2xl p-5 flex items-center gap-4 mb-8">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center">
-                        <i class="fa-solid fa-globe text-2xl text-blue-600"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold"> WEBSITE DEVELOPMENT </h2>
-                </div>
+           <a href="{% url 'portfolio' %}"
+               class="py-3 px-4 rounded-xl hover:bg-red-700 hover:text-white transition-all duration-300 flex items-center gap-3 font-semibold text-sm mt-4 bg-red-700 text-white">
+               <i class="fa-solid fa-briefcase w-6"></i> View Portfolio
+           </a>
+         </div>
+     </div>
 
-                <div class="space-y-9">
-                    <a href="{% url 'shopify' %}" class="block ">
-                        <h3 class="text-2xl font-bold">Shopify</h3>
-                        <p class="text-gray-600"> Powerful e-commerce platform for businesses.</p>
-                    </a>
+     <!-- Centered Desktop Navbar Menu Links -->
+     <div class="flex-1 hidden min-[1200px]:flex justify-center">
+         <ul class="flex items-center justify-center gap-6 xl:gap-8 font-bold text-xs xl:text-sm text-gray-800 uppercase tracking-wide">
 
-                    <a href="{% url 'wordpress' %}" class="block ">
-                        <h3 class="text-2xl font-bold">WordPress</h3>
-                        <p class="text-gray-600">Popular CMS for website management.</p>
-                    </a>
+             <!-- 1. WEBSITE -->
+             <li class="relative group py-5">
+               <a href="{% url 'webdesign' %}" class="flex items-center gap-1.5 hover:text-[#ab1f2b] transition cursor-pointer">
+                   WEBSITE
+                   <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-[#ab1f2b] group-hover:rotate-180 transition-transform duration-300"></i>
+               </a>
 
-                    <a href="{% url 'ecommerce' %}" class="block ">
-                        <h3 class="text-2xl font-bold">E-Commerce</h3>
-                        <p class="text-gray-600"> Buying and selling products online.</p>
-                    </a>
+               <!-- Website Dropdown (Positioned left-0 z-[9999] above everything) -->
+               <div class="absolute left-0 top-full mt-1 w-[550px] bg-white rounded-2xl shadow-2xl p-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999] border border-gray-100">
+                   <div class="grid grid-cols-2 gap-3 text-left">
+                       <a href="{% url 'shopify' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-brands fa-shopify text-green-600 text-lg"></i> Shopify Development
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">High-converting e-commerce stores</p>
+                       </a>
 
-                    <a href="{% url 'webdesign' %}" class="block ">
-                        <h3 class="text-2xl font-bold"> Web Design & Development </h3>
-                        <p class="text-gray-600"> Creating and refining websites.</p>
-                    </a>
+                       <a href="{% url 'wordpress' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-brands fa-wordpress text-blue-600 text-lg"></i> WordPress Sites
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Flexible CMS & corporate sites</p>
+                       </a>
 
-                </div>
-            </div>
+                       <a href="{% url 'ecommerce' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-cart-shopping text-yellow-600 text-lg"></i> Custom E-Commerce
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Online stores with secure checkout</p>
+                       </a>
 
-            <!--== img ==-->
-            <div class="bg-gray-100 rounded-3xl p-6">
-                <h2 class="text-3xl font-bold">View all services</h2>
-                <p class="mt-3 text-gray-600"> We don't stop here, check out all the services we offer.</p>
-               <img src="../images/computer.gif" class="mt-10 rounded-xl">
-            </div>
-        </div>
-    </div>
-    </li>
-            <li>MARKETING</li>
-            <li>SEO</li>
-            <li>GRAPHIC DESIGNING</li>
-            <li>OTHER SERVICES</li>
-            <li>SOFTWARE SERVICES</li>
-        </ul>
+                       <a href="{% url 'webdesign' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-laptop-code text-[#ab1f2b] text-lg"></i> Web Design & UI
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Creative web development</p>
+                       </a>
+                   </div>
+                   <div class="mt-4 pt-3 border-t border-gray-100 text-center">
+                       <a href="{% url 'webdesign' %}" class="text-xs font-bold text-[#ab1f2b] hover:text-black transition">
+                           VIEW ALL WEBSITE SERVICES →
+                       </a>
+                   </div>
+               </div>
+             </li>
 
-        <div class="hidden md:flex w-48 justify-center">
-            <a href="portfolio.html" class="bg-red-700 shadow-2xl shadow-red-300 text-white font-bold px-6 py-3 rounded-full">
-                PORTFOLIO
-            </a>
-        </div>
-  </nav>
+             <!-- 2. MARKETING -->
+             <li class="relative group py-5">
+               <a href="{% url 'marketing' %}" class="flex items-center gap-1.5 hover:text-[#ab1f2b] transition cursor-pointer">
+                   MARKETING
+                   <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-[#ab1f2b] group-hover:rotate-180 transition-transform duration-300"></i>
+               </a>
+
+               <!-- Marketing Dropdown -->
+               <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[550px] bg-white rounded-2xl shadow-2xl p-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999] border border-gray-100">
+                   <div class="grid grid-cols-2 gap-3 text-left">
+                       <a href="{% url 'marketing' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-brands fa-meta text-blue-600"></i> Social Media Marketing
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Facebook, Instagram & TikTok Ads</p>
+                       </a>
+
+                       <a href="{% url 'marketing' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-rectangle-ad text-red-600"></i> PPC & Google Ads
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">High-ROI search engine marketing</p>
+                       </a>
+
+                       <a href="{% url 'marketing' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-paper-plane text-green-600"></i> Email Marketing
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Automated sales funnels & newsletters</p>
+                       </a>
+
+                       <a href="{% url 'marketing' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-pen-nib text-purple-600"></i> Content & Copywriting
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">SEO content & conversion strategy</p>
+                       </a>
+                   </div>
+                   <div class="mt-4 pt-3 border-t border-gray-100 text-center">
+                       <a href="{% url 'marketing' %}" class="text-xs font-bold text-[#ab1f2b] hover:text-black transition">
+                           VIEW ALL DIGITAL MARKETING SERVICES →
+                       </a>
+                   </div>
+               </div>
+             </li>
+
+             <!-- 3. SEO -->
+             <li class="relative group py-5">
+               <a href="{% url 'seo' %}" class="flex items-center gap-1.5 hover:text-[#ab1f2b] transition cursor-pointer">
+                   SEO
+                   <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-[#ab1f2b] group-hover:rotate-180 transition-transform duration-300"></i>
+               </a>
+
+               <!-- SEO Dropdown -->
+               <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[550px] bg-white rounded-2xl shadow-2xl p-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999] border border-gray-100">
+                   <div class="grid grid-cols-2 gap-3 text-left">
+                       <a href="{% url 'seo' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-code text-red-600"></i> On-Page SEO
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Meta tags, content & schema setup</p>
+                       </a>
+
+                       <a href="{% url 'seo' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-link text-blue-600"></i> Off-Page SEO
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">High DA backlinks & authority links</p>
+                       </a>
+
+                       <a href="{% url 'seo' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-screwdriver-wrench text-yellow-600"></i> Technical SEO
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Core web vitals & site speed audit</p>
+                       </a>
+
+                       <a href="{% url 'seo' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-location-dot text-green-600"></i> Local SEO & Maps
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Google Business Profile ranking</p>
+                       </a>
+                   </div>
+                   <div class="mt-4 pt-3 border-t border-gray-100 text-center">
+                       <a href="{% url 'seo' %}" class="text-xs font-bold text-[#ab1f2b] hover:text-black transition">
+                           VIEW ALL SEO SERVICES & AUDIT →
+                       </a>
+                   </div>
+               </div>
+             </li>
+
+             <!-- 4. GRAPHIC DESIGNING -->
+             <li class="relative group py-5">
+               <a href="{% url 'graphic_design' %}" class="flex items-center gap-1.5 hover:text-[#ab1f2b] transition cursor-pointer">
+                   GRAPHIC DESIGNING
+                   <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-[#ab1f2b] group-hover:rotate-180 transition-transform duration-300"></i>
+               </a>
+
+               <!-- Graphic Designing Dropdown -->
+               <div class="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[550px] bg-white rounded-2xl shadow-2xl p-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999] border border-gray-100">
+                   <div class="grid grid-cols-2 gap-3 text-left">
+                       <a href="{% url 'graphic_design' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-pen-nib text-red-600"></i> Logo & Branding
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Unique logos & visual brand guide</p>
+                       </a>
+
+                       <a href="{% url 'graphic_design' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-desktop text-purple-600"></i> UI/UX Design
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Figma wireframes & app interfaces</p>
+                       </a>
+
+                       <a href="{% url 'graphic_design' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-hashtag text-blue-600"></i> Social Media Posts
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Ad banners & Instagram carousels</p>
+                       </a>
+
+                       <a href="{% url 'graphic_design' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-box text-green-600"></i> Packaging & Print
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Product labels & print stationery</p>
+                       </a>
+                   </div>
+                   <div class="mt-4 pt-3 border-t border-gray-100 text-center">
+                       <a href="{% url 'graphic_design' %}" class="text-xs font-bold text-[#ab1f2b] hover:text-black transition">
+                           VIEW DESIGN PORTFOLIO →
+                       </a>
+                   </div>
+               </div>
+             </li>
+
+             <!-- 5. OTHER SERVICES -->
+             <li class="relative group py-5">
+               <a href="{% url 'other_services' %}" class="flex items-center gap-1.5 hover:text-[#ab1f2b] transition cursor-pointer">
+                   OTHER SERVICES
+                   <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-[#ab1f2b] group-hover:rotate-180 transition-transform duration-300"></i>
+               </a>
+
+               <!-- Other Services Dropdown -->
+               <div class="absolute right-0 top-full mt-1 w-[550px] bg-white rounded-2xl shadow-2xl p-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999] border border-gray-100">
+                   <div class="grid grid-cols-2 gap-3 text-left">
+                       <a href="{% url 'other_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-server text-red-600"></i> Domain & Hosting
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">High-speed SSD cloud servers</p>
+                       </a>
+
+                       <a href="{% url 'other_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-feather text-blue-600"></i> Content Writing
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">SEO articles & web copy</p>
+                       </a>
+
+                       <a href="{% url 'other_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-shield-halved text-green-600"></i> Site Maintenance
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Security, backups & updates</p>
+                       </a>
+
+                       <a href="{% url 'other_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-plug text-yellow-600"></i> API Integration
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Payment & CRM sync</p>
+                       </a>
+                   </div>
+               </div>
+             </li>
+
+             <!-- 6. SOFTWARE SERVICES -->
+             <li class="relative group py-5">
+               <a href="{% url 'software_services' %}" class="flex items-center gap-1.5 hover:text-[#ab1f2b] transition cursor-pointer">
+                   SOFTWARE SERVICES
+                   <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-[#ab1f2b] group-hover:rotate-180 transition-transform duration-300"></i>
+               </a>
+
+               <!-- Software Services Dropdown -->
+               <div class="absolute right-0 top-full mt-1 w-[550px] bg-white rounded-2xl shadow-2xl p-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999] border border-gray-100">
+                   <div class="grid grid-cols-2 gap-3 text-left">
+                       <a href="{% url 'software_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-code text-red-600"></i> Custom Web Apps
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Python, Django, React apps</p>
+                       </a>
+
+                       <a href="{% url 'software_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-mobile-screen text-blue-600"></i> Mobile App Dev
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">iOS & Android applications</p>
+                       </a>
+
+                       <a href="{% url 'software_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-cloud text-purple-600"></i> SaaS Platforms
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Enterprise multi-tenant software</p>
+                       </a>
+
+                       <a href="{% url 'software_services' %}" class="p-3 rounded-xl hover:bg-gray-50 transition border border-gray-100 group/sub">
+                           <h5 class="font-bold text-gray-900 text-sm flex items-center gap-2 group-hover/sub:text-[#ab1f2b] transition">
+                               <i class="fa-solid fa-robot text-green-600"></i> AI & DevOps Setup
+                           </h5>
+                           <p class="text-xs text-gray-500 font-normal mt-1">Cloud deployment & automation</p>
+                       </a>
+                   </div>
+               </div>
+             </li>
+         </ul>
+     </div>
+
+     <!-- Portfolio Button -->
+     <div class="hidden min-[1200px]:flex items-center justify-end whitespace-nowrap">
+         <a href="{% url 'portfolio' %}" class="bg-[#ab1f2b] shadow-lg shadow-red-200 text-white font-bold px-6 py-2.5 rounded-full hover:bg-black transition duration-300 text-xs tracking-wider uppercase">
+             PORTFOLIO
+         </a>
+     </div>
+ </nav>
 </div>
 
 <div class="pt-[120px] md:pt-[120px]">
 </div>
+
+<script>
+    function openMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        if (sideMenu) {
+            sideMenu.classList.remove('-translate-x-full');
+        }
+    }
+    function closeMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        if (sideMenu) {
+            sideMenu.classList.add('-translate-x-full');
+        }
+    }
+</script>
 
 </body>
 </html>
