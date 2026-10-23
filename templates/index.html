@@ -12,46 +12,41 @@
 </head>
 <body>
 
+<!-- Flash Messages -->
+{% if messages %}
+<div class="fixed top-20 right-4 z-[99999] max-w-md w-full space-y-2 pointer-events-none">
+    {% for message in messages %}
+    <div class="pointer-events-auto p-4 rounded-xl shadow-2xl bg-white text-gray-900 border-l-4 border-[#ab1f2b] flex items-center justify-between gap-3 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <p class="text-sm font-medium">{{ message }}</p>
+        </div>
+        <button onclick="this.parentElement.remove()" class="text-gray-400 hover:text-gray-600">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <!--====== Navbar ======= -->
 {% include "components/navbar.html" %}
+
+<!-- Sidebar Component -->
+{% include "components/sidebar.html" %}
+
 <main class="flex-1 w-full lg:pl-20">
 
-
   <!-- ============================= banner ============================== -->
-
-   <!-- ============= site bar =============-->
- <div id="sidebar"
-     class="hidden xl:flex fixed left-0 h-screen w-20 bg-white border-r border-gray-800 flex-col justify-between items-center py-16 z-50 transition-all duration-300">
-
-     <div class="flex flex-col items-center gap-16 lg:gap-28">
-        <div class="flex flex-col items-center">
-            <button  onclick="modal.classList.remove('hidden')" class="rotate-[-90deg] whitespace-nowrap font-bold tracking-wider mt-10 lg:mt-20">
-                GET IN TOUCH
-            </button>
-            <img src="{% static 'images/chat (1).webp' %}" class="w-7 h-7 lg:w-8 lg:h-8 mt-10 lg:mt-14" alt="Icon">
-        </div>
-
-         <div class="flex flex-col items-center">
-            <a href="https://wa.me/+923175448546" target="_blank">
-              <button onclick="openWhatsApp()" class="rotate-[-90deg] whitespace-nowrap font-bold tracking-wider mt-10">
-                 WHATSAPP
-              </button>
-            </a>
-
-           <script>
-              function openWhatsApp() {
-              window.open("https://wa.me/923001234567", "_blank");
-               }
-           </script>
-             <img src="{% static 'images/whatsapp (1).webp' %}" class="w-5 h-5 lg:w-6 lg:h-6 mb-10 lg:mt-10" alt="Icon">
-        </div>
-    </div>
-</div>
 
 <!--======= banner img =======-->
 
    {% if banner %}
-     <img class="w-full h-full overflow-hidden" src="{{ banner.image.url }}" alt="">
+     <img class="w-full h-full overflow-hidden" src="{{ banner.image.url }}" alt="Banner">
+   {% else %}
+     <img class="w-full h-full overflow-hidden" src="{% static 'images/banner.webp' %}" alt="Banner">
    {% endif %}
 
     <!--===================== Our Services =========================== -->
@@ -68,32 +63,39 @@
   <!--== Cards ==-->
   {% for service in services %}
 
-<div class="swiper-slide bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300">
+<div class="swiper-slide bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300 flex flex-col justify-between">
+    <div>
+        <!-- Icon (Shopify and WordPress brand icons explicitly removed) -->
+        <div class="h-10 mb-4 flex items-center">
+            {% if service.icon_class and "shopify" not in service.icon_class|lower and "wordpress" not in service.icon_class|lower %}
+            <div class="text-3xl md:text-4xl text-[#ab1f2b]">
+                <i class="{{ service.icon_class }}"></i>
+            </div>
+            {% endif %}
+        </div>
 
-    <!-- Icon -->
-    <div class="text-3xl md:text-4xl mb-4">
-        <i class="{{ service.icon_class }}"></i>
+        <!-- Title -->
+        <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900">
+            {{ service.title }}
+        </h3>
+
+        <!-- Short Description -->
+        <h5 class="text-gray-800 font-medium mb-3 text-sm">
+            {{ service.short_description }}
+        </h5>
+
+        <!-- Description -->
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+            {{ service.description }}
+        </p>
     </div>
 
-    <!-- Title -->
-    <h3 class="text-xl md:text-2xl font-bold mb-2">
-        {{ service.title }}
-    </h3>
-
-    <!-- Short Description -->
-    <h5 class="text-gray-800 mb-3">
-        {{ service.short_description }}
-    </h5>
-
-    <!-- Description -->
-    <p class="text-gray-500 text-sm md:text-base mb-4">
-        {{ service.description }}
-    </p>
-
-    <!-- Button -->
-  <button class="text-blue-600 font-semibold hover:text-blue-800">
-     {{ service.button_text }} →
-  </button>
+    <!-- Working Navigation Button -->
+    <a href="{% if 'shopify' in service.title|lower %}{% url 'shopify' %}{% elif 'wordpress' in service.title|lower %}{% url 'wordpress' %}{% elif 'marketing' in service.title|lower %}{% url 'marketing' %}{% elif 'seo' in service.title|lower %}{% url 'seo' %}{% elif 'graphic' in service.title|lower %}{% url 'graphic_design' %}{% elif 'software' in service.title|lower %}{% url 'software_services' %}{% else %}{% url 'webdesign' %}{% endif %}"
+       class="text-[#ab1f2b] hover:text-black font-bold text-sm inline-flex items-center gap-1.5 mt-2 transition group">
+       <span>{{ service.button_text|default:"Read More" }}</span>
+       <span class="group-hover:translate-x-1 transition-transform">→</span>
+    </a>
 </div>
 {% endfor %}
 
@@ -258,91 +260,79 @@
             <div class="lg:col-span-3 mt-10">
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
 
-                    <!-- Card -->
-                    <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
-                        <div class="flex items-center gap-3 mb-4">
-                            <img src="{% static 'images/HF_-_LOGO_NEW (2).webp' %}"
-                                class="w-16 h-8 ">
-
+                    {% if testimonials %}
+                        {% for t in testimonials %}
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full flex flex-col justify-between">
                             <div>
-                                <h3 class="font-semibold ml-2">
-                                    Arsalan Akhtar
-                                </h3>
+                                <div class="flex items-center gap-3 mb-4">
+                                    {% if t.avatar %}
+                                        <img src="{{ t.avatar.url }}" class="w-12 h-12 rounded-full object-cover">
+                                    {% else %}
+                                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center font-bold text-red-700">
+                                            {{ t.client_name|slice:":1" }}
+                                        </div>
+                                    {% endif %}
 
-                                <p class="text-sm text-gray-500 ml-2">
-                                    CEO of Harmain Foods
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">
+                                            {{ t.client_name }}
+                                        </h3>
+                                        <p class="text-xs text-gray-500">
+                                            {{ t.company }}{% if t.country %} · {{ t.country }}{% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="text-red-500 text-sm mb-3">
+                                    {% for i in "12345"|slice:t.rating %}★{% endfor %}
+                                </div>
+
+                                <p class="text-gray-600 text-sm leading-6">
+                                    {{ t.message }}
                                 </p>
                             </div>
                         </div>
-                        <div class="text-red-500 text-lg mb-3">
-                            ★★★★★
-                        </div>
-
-                        <p class="text-gray-600 leading-7">
-                            Ozbix delivered an outstanding solution with
-                            excellent communication and timely delivery.
-                            Highly recommended for professional web
-                            development services.
-                        </p>
-                    </div>
-
-                    <!-- Card -->
-
-                    <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
-                        <div class="flex items-center gap-3 mb-4">
-                            <img src="{% static 'images/10.webp' %}"
-                                class="w-12 h-12 rounded-full object-cover">
-
-                            <div>
-                                <h3 class="font-semibold">
-                                    Usama Poochi
-                                </h3>
-
-                                <p class="text-sm text-gray-500">
-                                    Business Owner
-                                </p>
+                        {% endfor %}
+                    {% else %}
+                        <!-- Default Fallback Card 1 -->
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                            <div class="flex items-center gap-3 mb-4">
+                                <img src="{% static 'images/HF_-_LOGO_NEW (2).webp' %}" class="w-16 h-8 object-contain">
+                                <div>
+                                    <h3 class="font-semibold">Arsalan Akhtar</h3>
+                                    <p class="text-sm text-gray-500">CEO of Harmain Foods</p>
+                                </div>
                             </div>
+                            <div class="text-red-500 text-lg mb-3">★★★★★</div>
+                            <p class="text-gray-600 leading-7">Ozbix delivered an outstanding solution with excellent communication and timely delivery. Highly recommended for professional web development services.</p>
                         </div>
-                        <div class="text-red-500 text-lg mb-3">
-                            ★★★★★
-                        </div>
 
-                        <p class="text-gray-600 leading-7">
-                            The team created a scalable platform that
-                            improved our workflow and increased user
-                            engagement significantly.
-                        </p>
-                    </div>
-
-                    <!-- Card -->
-
-                    <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
-                        <div class="flex items-center gap-3 mb-4">
-                            <img src="{% static 'images/19-1.webp'%}"
-                                class="w-12 h-12 rounded-full object-cover">
-
-                            <div>
-                                <h3 class="font-semibold">
-                                    Bilal Mehar
-                                </h3>
-
-                                <p class="text-sm text-gray-500">
-                                    Founder
-                                </p>
+                        <!-- Default Fallback Card 2 -->
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                            <div class="flex items-center gap-3 mb-4">
+                                <img src="{% static 'images/10.webp' %}" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h3 class="font-semibold">Usama Poochi</h3>
+                                    <p class="text-sm text-gray-500">Business Owner</p>
+                                </div>
                             </div>
+                            <div class="text-red-500 text-lg mb-3">★★★★★</div>
+                            <p class="text-gray-600 leading-7">The team created a scalable platform that improved our workflow and increased user engagement significantly.</p>
                         </div>
 
-                        <div class="text-red-500 text-lg mb-3">
-                            ★★★★★
+                        <!-- Default Fallback Card 3 -->
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                            <div class="flex items-center gap-3 mb-4">
+                                <img src="{% static 'images/19-1.webp' %}" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h3 class="font-semibold">Bilal Mehar</h3>
+                                    <p class="text-sm text-gray-500">Founder</p>
+                                </div>
+                            </div>
+                            <div class="text-red-500 text-lg mb-3">★★★★★</div>
+                            <p class="text-gray-600 leading-7">Ozbix exceeded expectations with quality work, responsive support and excellent project management.</p>
                         </div>
-
-                        <p class="text-gray-600 leading-7">
-                            Ozbix exceeded expectations with quality work,
-                            responsive support and excellent project
-                            management.
-                        </p>
-
-                    </div>
+                    {% endif %}
 
                 </div>
             </div>
@@ -622,272 +612,22 @@
       & Boost Your Success
     </h2>
 
-   <!--=== Button ===-->
-<button onclick="modal.classList.remove('hidden')"
-  class="bg-red-700 font-bold text-white shadow-2xl shadow-red-600 px-6 py-3 mt-12 w-48 rounded-full">
-  Let's Talk
-</button>
-
-<div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-  <div class="bg-white w-full max-w-3xl rounded-xl p-6 relative">
-    
-    <button onclick="modal.classList.add('hidden')"
-      class="absolute top-4 right-5 text-3xl">&times;</button>
-
-    <h2 class="text-4xl font-bold text-center text-red-700 mb-6">
-      Let's Talk With Us
-    </h2>
-<form method="POST" action="{% url 'contact' %}" class="space-y-4">
-    {% csrf_token %}
-
-    <input
-        type="text"
-        name="full_name"
-        placeholder="Full Name"
-        class="w-full border p-3 rounded"
-        required
-    >
-
-    <div class="grid md:grid-cols-2 gap-4">
-
-        <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            class="border p-3 rounded"
-            required
-        >
-
-        <input
-            type="text"
-            name="phone"
-            placeholder="Your Number"
-            class="border p-3 rounded"
-            required
-        >
-
-    </div>
-
-    <div>
-        <p class="font-semibold mb-2">Choose Services</p>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-
-            <label>
-                <input type="checkbox" name="services" value="Marketing">
-                Marketing
-            </label>
-
-            <label>
-                <input type="checkbox" name="services" value="Graphic Design">
-                Graphic Design
-            </label>
-
-            <label>
-                <input type="checkbox" name="services" value="Website Development">
-                Website Development
-            </label>
-
-            <label>
-                <input type="checkbox" name="services" value="SEO">
-                SEO
-            </label>
-
-            <label>
-                <input type="checkbox" name="services" value="Product Photography">
-                Product Photography
-            </label>
-
-            <label>
-                <input type="checkbox" name="services" value="Software Development">
-                Software Development
-            </label>
-
-            <label>
-                <input type="checkbox" name="services" value="Other">
-                Other
-            </label>
-
-        </div>
-    </div>
-
-    <textarea
-        name="message"
-        rows="5"
-        placeholder="Type your message"
-        class="w-full border p-3 rounded"
-        required
-    ></textarea>
-
-    <div class="border rounded p-4 w-72 flex items-center gap-3">
-        <input type="checkbox" class="w-5 h-5" required>
-        <span>I'm not a robot</span>
-    </div>
-
-    <button
-        type="submit"
-        class="w-full bg-red-700 text-white py-3 rounded font-bold hover:bg-red-800">
-        SEND MESSAGE
+    <!--=== Button ===-->
+    <button type="button" onclick="openModal()"
+      class="bg-[#ab1f2b] hover:bg-black font-bold text-white shadow-2xl shadow-red-600 px-6 py-3 mt-12 w-48 rounded-full transition duration-300 cursor-pointer">
+      Let's Talk
     </button>
 
-</form>
   </div>
-</div>
 </section>
 
-<!-- ============================== Footer =============================== -->
-
-<footer class="relative bg-[#1f1b1b] text-white overflow-hidden">
-    <div class="absolute -top-32 -right-32 w-96 h-96 bg-red-700 rounded-full blur-[120px] opacity-30"></div>
-    <div class="absolute -bottom-40 -left-40 w-[450px] h-[450px] bg-red-700 rounded-full blur-[150px] opacity-20"></div>
-    <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
-
-        <!-- ========== First Row ============ -->
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-14">
-
-            <!-- =========== Logo =========== -->
-            <div>
-                <img class="w-72 mb-6" src="{% static 'images/oz-logo.webp' %}" alt="Logo">
-                <p class="text-gray-300 leading-8">
-                    Ozbix Development House is Pakistan,
-                    Australian and Dubai based company that
-                    can work with professional team and
-                    always gives customer a great service.
-                </p>
-            </div>
-
-            <!--============== Graphic ============= -->
-            
-            <div>
-                <h2 class="text-4xl font-bold mb-8">
-                    Graphic Design
-                </h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="hover:text-red-500 cursor-pointer">Logo Design</li>
-                    <li class="hover:text-red-500 cursor-pointer">Cloth Design</li>
-                    <li class="hover:text-red-500 cursor-pointer">Social Media Post Design</li>
-                    <li class="hover:text-red-500 cursor-pointer">Business Stationary</li>
-                    <li class="hover:text-red-500 cursor-pointer">Website Design</li>
-                    <li class="hover:text-red-500 cursor-pointer">Products Design</li>
-                </ul>
-            </div>
-
-            <!--================ Marketing ==================-->
-
-            <div>
-                <h2 class="text-4xl font-bold mb-8">
-                    Digital Marketing
-                </h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="hover:text-red-500 cursor-pointer">Digital Marketing</li>
-                    <li class="hover:text-red-500 cursor-pointer">Social Media Marketing</li>
-                    <li class="hover:text-red-500 cursor-pointer">Email Marketing</li>
-                    <li class="hover:text-red-500 cursor-pointer">Pay Per Click (PPC)</li>
-                    <li class="hover:text-red-500 cursor-pointer">Content Writing</li>
-                </ul>
-            </div>
-
-            <!-- =============== SEO ================ -->
-
-            <div>
-
-                <h2 class="text-4xl font-bold mb-8">
-                    SEO
-                </h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="hover:text-red-500 cursor-pointer">On Page SEO</li>
-                    <li class="hover:text-red-500 cursor-pointer">Off Page SEO</li>
-                    <li class="hover:text-red-500 cursor-pointer">WordPress SEO</li>
-                    <li class="hover:text-red-500 cursor-pointer">Shopify SEO</li>
-                    <li class="hover:text-red-500 cursor-pointer">Magento SEO</li>
-                    <li class="hover:text-red-500 cursor-pointer">E-Commerce SEO</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!--================ Second Row ==================== -->
-
-      <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-14 mt-20">
-
-            <!--====== Website ========= -->
-
-            <div>
-                <h2 class="text-4xl font-bold mb-8">
-                    Website
-                </h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="hover:text-red-500 cursor-pointer">E-Commerce Website</li>
-                    <li class="hover:text-red-500 cursor-pointer">WordPress Website</li>
-                    <li class="hover:text-red-500 cursor-pointer">Shopify Website</li>
-                    <li class="hover:text-red-500 cursor-pointer">Website Development</li>
-                </ul>
-            </div>
-
-            <!-- ============= Other ============== -->
-
-            <div>
-                <h2 class="text-4xl font-bold mb-8">
-                    Other Service
-                </h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="hover:text-red-500 cursor-pointer">Software Development</li>
-                    <li class="hover:text-red-500 cursor-pointer">Mobile App Development</li>
-                    <li class="hover:text-red-500 cursor-pointer">Domain & Hosting</li>
-                    <li class="hover:text-red-500 cursor-pointer">Graphic Designing</li>
-                    <li class="hover:text-red-500 cursor-pointer">Photography</li>
-                </ul>
-            </div>
-
-            <!--======== Explore ============ -->
-
-            <div>
-                <h2 class="text-4xl font-bold mb-8">
-                    Explore
-                </h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="hover:text-red-500 cursor-pointer">About</li>
-                    <li class="hover:text-red-500 cursor-pointer">CEO Message</li>
-                    <li class="hover:text-red-500 cursor-pointer">Vision & Mission</li>
-                    <li class="hover:text-red-500 cursor-pointer">Portfolio</li>
-                    <li class="hover:text-red-500 cursor-pointer">Contact Us</li>
-                    <li class="hover:text-red-500 cursor-pointer">Careers</li>
-                </ul>
-            </div>
-
-            <!-- ============ Contact ============ -->
-
-            <div>
-                <h2 class="text-4xl font-bold mb-8">
-                    Contact Us
-                </h2>
-                <div class="space-y-5 text-gray-300">
-                    <p><strong>Pakistan:</strong> +92 311 456 324</p>
-                    <p><strong>UAE:</strong> +971 50 831 2016</p>
-                    <p><strong>Australia:</strong> +61 469 389 357</p>
-                    <p>
-                        <i class="fa-solid fa-envelope mr-2"></i>
-                        info@ozbix.com
-                    </p>
-
-                    <hr class="border-gray-600">
-
-                    <p>
-                        <i class="fa-solid fa-phone mr-2"></i>
-                        +92 213 2226060
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-envelope mr-2"></i>
-                        hr@ozbix.com
-                    </p>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</footer>
 </main>
+
+<!-- Footer Component -->
+{% include "components/footer.html" %}
+
+<!-- Contact Modal Component -->
+{% include "components/contact_modal.html" %}
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{% static 'js/scripts.js' %}"></script>
 

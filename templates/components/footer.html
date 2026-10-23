@@ -1,156 +1,199 @@
-<!DOCTYPE html>
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer</title>
-</head>
-<body>
-    
-<!-- ============================== Footer =============================== -->
+<!-- ============================== FOOTER =============================== -->
+<footer class="relative bg-[#1a1717] text-white overflow-hidden">
+    <!-- Glow effects -->
+    <div class="absolute -top-32 -right-32 w-96 h-96 bg-red-700 rounded-full blur-[140px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-[450px] h-[450px] bg-red-700 rounded-full blur-[160px] opacity-20 pointer-events-none"></div>
 
-<footer class="relative bg-[#1f1b1b] text-white overflow-hidden">
-    <div class="absolute -top-32 -right-32 w-96 h-96 bg-red-700 rounded-full blur-[120px] opacity-30"></div>
-    <div class="absolute -bottom-40 -left-40 w-[450px] h-[450px] bg-red-700 rounded-full blur-[150px] opacity-20"></div>
-    <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 pt-20 pb-12 relative z-10">
 
         <!-- ========== First Row ============ -->
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-14">
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-10 lg:gap-14">
 
-            <!-- =========== Logo =========== -->
-            <div>
-                <a href="{% url 'home' %}">
-                    <img class="w-72 mb-6" src="{% static 'images/oz-logo.webp' %}" alt="Logo">
+            <!-- =========== Brand Column =========== -->
+            <div class="space-y-5">
+                <a href="{% url 'home' %}" class="inline-block">
+                    {% if site and site.logo %}
+                        <img class="w-56 max-h-16 object-contain" src="{{ site.logo.url }}" alt="{{ site.site_name }}">
+                    {% else %}
+                        <img class="w-56" src="{% static 'images/oz-logo.webp' %}" alt="Ozbix Logo">
+                    {% endif %}
                 </a>
-                <p class="text-gray-300 leading-8">
-                    Ozbix Development House is Pakistan,
-                    Australian and Dubai based company that
-                    can work with professional team and
-                    always gives customer a great service.
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    {{ site.footer_description|default:"Ozbix Development House is an Australia, Dubai and Pakistan based IT firm providing cutting-edge web, mobile, SEO and design solutions to global enterprises." }}
                 </p>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="{{ site.facebook_url|default:'#' }}" target="_blank" aria-label="Facebook"
+                       class="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#ab1f2b] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="{{ site.instagram_url|default:'#' }}" target="_blank" aria-label="Instagram"
+                       class="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#ab1f2b] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                    </a>
+                    <a href="{{ site.linkedin_url|default:'#' }}" target="_blank" aria-label="LinkedIn"
+                       class="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#ab1f2b] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-linkedin-in text-sm"></i>
+                    </a>
+                    <a href="{{ site.twitter_url|default:'#' }}" target="_blank" aria-label="Twitter"
+                       class="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#ab1f2b] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-x-twitter text-sm"></i>
+                    </a>
+                </div>
             </div>
 
-            <!--============== Graphic ============= -->
+            <!--============== Graphic Design ============= -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    <a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Graphic Design</a>
-                </h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Logo Design</a></li>
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">UI/UX App Design</a></li>
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Social Media Post Design</a></li>
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Business Stationery</a></li>
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Packaging & Print</a></li>
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Vector Illustration</a></li>
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <a href="{% url 'graphic_design' %}" class="hover:text-red-400 transition">Graphic Design</a>
+                </h3>
+                <ul class="space-y-2.5 text-gray-400 text-sm">
+                    <li><a href="{% url 'graphic_design' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Logo Design</a></li>
+                    <li><a href="{% url 'graphic_design' %}" class="hover:text-white hover:translate-x-1 inline-block transition">UI/UX App Design</a></li>
+                    <li><a href="{% url 'graphic_design' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Social Media Post Design</a></li>
+                    <li><a href="{% url 'graphic_design' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Business Stationery</a></li>
+                    <li><a href="{% url 'graphic_design' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Packaging & Print Design</a></li>
+                    <li><a href="{% url 'graphic_design' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Vector Illustrations</a></li>
                 </ul>
             </div>
 
             <!--================ Marketing ==================-->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    <a href="{% url 'marketing' %}" class="hover:text-red-500 transition">Digital Marketing</a>
-                </h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li><a href="{% url 'marketing' %}" class="hover:text-red-500 transition">Digital Marketing</a></li>
-                    <li><a href="{% url 'marketing' %}" class="hover:text-red-500 transition">Social Media Marketing</a></li>
-                    <li><a href="{% url 'marketing' %}" class="hover:text-red-500 transition">Email Marketing</a></li>
-                    <li><a href="{% url 'marketing' %}" class="hover:text-red-500 transition">Pay Per Click (PPC)</a></li>
-                    <li><a href="{% url 'marketing' %}" class="hover:text-red-500 transition">Content Writing</a></li>
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <a href="{% url 'marketing' %}" class="hover:text-red-400 transition">Digital Marketing</a>
+                </h3>
+                <ul class="space-y-2.5 text-gray-400 text-sm">
+                    <li><a href="{% url 'marketing' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Social Media Marketing</a></li>
+                    <li><a href="{% url 'marketing' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Google & Meta Ads (PPC)</a></li>
+                    <li><a href="{% url 'marketing' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Email Funnels & Automation</a></li>
+                    <li><a href="{% url 'marketing' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Content Writing & Copy</a></li>
+                    <li><a href="{% url 'marketing' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Brand Strategy & Growth</a></li>
                 </ul>
             </div>
 
             <!-- =============== SEO ================ -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    <a href="{% url 'seo' %}" class="hover:text-red-500 transition">SEO</a>
-                </h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li><a href="{% url 'seo' %}" class="hover:text-red-500 transition">On Page SEO</a></li>
-                    <li><a href="{% url 'seo' %}" class="hover:text-red-500 transition">Off Page SEO</a></li>
-                    <li><a href="{% url 'seo' %}" class="hover:text-red-500 transition">Technical SEO</a></li>
-                    <li><a href="{% url 'seo' %}" class="hover:text-red-500 transition">Shopify SEO</a></li>
-                    <li><a href="{% url 'seo' %}" class="hover:text-red-500 transition">WordPress SEO</a></li>
-                    <li><a href="{% url 'seo' %}" class="hover:text-red-500 transition">Local Map Pack SEO</a></li>
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <a href="{% url 'seo' %}" class="hover:text-red-400 transition">SEO Optimization</a>
+                </h3>
+                <ul class="space-y-2.5 text-gray-400 text-sm">
+                    <li><a href="{% url 'seo' %}" class="hover:text-white hover:translate-x-1 inline-block transition">On-Page SEO Optimization</a></li>
+                    <li><a href="{% url 'seo' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Off-Page & Authority Backlinks</a></li>
+                    <li><a href="{% url 'seo' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Technical SEO & Core Web Vitals</a></li>
+                    <li><a href="{% url 'seo' %}" class="hover:text-white hover:translate-x-1 inline-block transition">E-Commerce & Shopify SEO</a></li>
+                    <li><a href="{% url 'seo' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Local Google Map Pack SEO</a></li>
                 </ul>
             </div>
 
         </div>
 
         <!--================ Second Row =================== -->
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-10 lg:gap-14 mt-14 pt-12 border-t border-gray-800/80">
 
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-14 mt-16">
-
-            <!--====== Website ======== -->
+            <!--====== Website Development ======== -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    <a href="{% url 'webdesign' %}" class="hover:text-red-500 transition">Website</a>
-                </h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li><a href="{% url 'ecommerce' %}" class="hover:text-red-500 transition">E-Commerce Website</a></li>
-                    <li><a href="{% url 'wordpress' %}" class="hover:text-red-500 transition">WordPress Website</a></li>
-                    <li><a href="{% url 'shopify' %}" class="hover:text-red-500 transition">Shopify Website</a></li>
-                    <li><a href="{% url 'webdesign' %}" class="hover:text-red-500 transition">Website Development</a></li>
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <a href="{% url 'webdesign' %}" class="hover:text-red-400 transition">Website Solutions</a>
+                </h3>
+                <ul class="space-y-2.5 text-gray-400 text-sm">
+                    <li><a href="{% url 'ecommerce' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Custom E-Commerce Stores</a></li>
+                    <li><a href="{% url 'wordpress' %}" class="hover:text-white hover:translate-x-1 inline-block transition">WordPress CMS Development</a></li>
+                    <li><a href="{% url 'shopify' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Shopify Store Setup & Design</a></li>
+                    <li><a href="{% url 'webdesign' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Responsive Web Design</a></li>
+                    <li><a href="{% url 'webdesign' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Web Speed & Security Audit</a></li>
                 </ul>
             </div>
 
-            <!-- ============= Other Service ============== -->
+            <!-- ============= Other Services ============== -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    <a href="{% url 'other_services' %}" class="hover:text-red-500 transition">Other Services</a>
-                </h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li><a href="{% url 'software_services' %}" class="hover:text-red-500 transition">Software Development</a></li>
-                    <li><a href="{% url 'software_services' %}" class="hover:text-red-500 transition">Mobile App Development</a></li>
-                    <li><a href="{% url 'other_services' %}" class="hover:text-red-500 transition">Domain & Hosting</a></li>
-                    <li><a href="{% url 'graphic_design' %}" class="hover:text-red-500 transition">Graphic Designing</a></li>
-                    <li><a href="{% url 'other_services' %}" class="hover:text-red-500 transition">Photography</a></li>
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <a href="{% url 'software_services' %}" class="hover:text-red-400 transition">Software & Tech</a>
+                </h3>
+                <ul class="space-y-2.5 text-gray-400 text-sm">
+                    <li><a href="{% url 'software_services' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Custom Software Development</a></li>
+                    <li><a href="{% url 'software_services' %}" class="hover:text-white hover:translate-x-1 inline-block transition">iOS & Android App Dev</a></li>
+                    <li><a href="{% url 'other_services' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Cloud Hosting & Domains</a></li>
+                    <li><a href="{% url 'other_services' %}" class="hover:text-white hover:translate-x-1 inline-block transition">API Integrations & Webhooks</a></li>
+                    <li><a href="{% url 'other_services' %}" class="hover:text-white hover:translate-x-1 inline-block transition">Commercial Product Photography</a></li>
                 </ul>
             </div>
 
-            <!--============ Explore ============ -->
+            <!--============ Quick Links ============ -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    Explore
-                </h2>
-                <ul class="space-y-3 text-gray-300">
-                    <li><a href="{% url 'home' %}" class="hover:text-red-500 transition">Home</a></li>
-                    <li><a href="{% url 'portfolio' %}" class="hover:text-red-500 transition">Portfolio</a></li>
-                    <li><a href="{% url 'home' %}#contact" class="hover:text-red-500 transition">Contact Us</a></li>
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <span>Quick Navigation</span>
+                </h3>
+                <ul class="space-y-2.5 text-gray-400 text-sm">
+                    <li><a href="{% url 'home' %}" class="hover:text-white hover:translate-x-1 inline-block transition"><i class="fa-solid fa-angle-right text-xs text-red-500 mr-1.5"></i> Home</a></li>
+                    <li><a href="{% url 'portfolio' %}" class="hover:text-white hover:translate-x-1 inline-block transition"><i class="fa-solid fa-angle-right text-xs text-red-500 mr-1.5"></i> Our Portfolio</a></li>
+                    <li><a href="javascript:void(0)" onclick="openModal()" class="hover:text-white hover:translate-x-1 inline-block transition"><i class="fa-solid fa-angle-right text-xs text-red-500 mr-1.5"></i> Contact & Inquiries</a></li>
+                    <li><a href="{% url 'dashboard_index' %}" class="hover:text-white hover:translate-x-1 inline-block transition"><i class="fa-solid fa-angle-right text-xs text-red-500 mr-1.5"></i> Client Portal / Admin</a></li>
                 </ul>
             </div>
 
-            <!-- ============ Contact ============ -->
+            <!-- ============ Contact & Action Button ============ -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 text-white">
-                    Contact Us
-                </h2>
-                <div class="space-y-4 text-gray-300 text-sm">
-                    <p><strong>Pakistan:</strong> +92 311 456 324</p>
-                    <p><strong>UAE:</strong> +971 50 831 2016</p>
-                    <p><strong>Australia:</strong> +61 469 389 357</p>
-                    <p>
-                        <i class="fa-solid fa-envelope mr-2 text-red-500"></i>
-                        info@ozbix.com
+                <h3 class="text-lg font-bold mb-6 text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#ab1f2b]"></span>
+                    <span>Contact Info</span>
+                </h3>
+                <div class="space-y-3 text-gray-300 text-sm">
+                    <p class="flex items-center gap-2">
+                        <span class="font-bold text-xs uppercase px-1.5 py-0.5 rounded bg-white/10 text-white">PK</span>
+                        <a href="tel:{{ site.phone_pk|default:'+92311456324' }}" class="hover:text-red-400 transition">{{ site.phone_pk|default:"+92 311 456 324" }}</a>
+                    </p>
+                    <p class="flex items-center gap-2">
+                        <span class="font-bold text-xs uppercase px-1.5 py-0.5 rounded bg-white/10 text-white">UAE</span>
+                        <a href="tel:{{ site.phone_uae|default:'+971508312016' }}" class="hover:text-red-400 transition">{{ site.phone_uae|default:"+971 50 831 2016" }}</a>
+                    </p>
+                    <p class="flex items-center gap-2">
+                        <span class="font-bold text-xs uppercase px-1.5 py-0.5 rounded bg-white/10 text-white">AUS</span>
+                        <a href="tel:{{ site.phone_au|default:'+61469389357' }}" class="hover:text-red-400 transition">{{ site.phone_au|default:"+61 469 389 357" }}</a>
+                    </p>
+                    <p class="flex items-center gap-2 pt-1">
+                        <i class="fa-regular fa-envelope text-red-500 text-sm"></i>
+                        <a href="mailto:{{ site.email|default:'info@ozbix.com' }}" class="hover:text-red-400 transition">{{ site.email|default:"info@ozbix.com" }}</a>
+                    </p>
+                    <p class="flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                        <a href="https://wa.me/{{ site.whatsapp_number|default:'923175448546'|cut:' '|cut:'+' }}" target="_blank"
+                           class="hover:text-emerald-400 transition font-semibold text-emerald-300">
+                            {{ site.whatsapp_number|default:"+92 317 544 8546" }}
+                        </a>
                     </p>
 
-                    <hr class="border-gray-700">
-
-                    <p>
-                        <i class="fa-solid fa-phone mr-2 text-red-500"></i>
-                        +92 213 2226060
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-envelope mr-2 text-red-500"></i>
-                        hr@ozbix.com
-                    </p>
+                    <!-- WORKING ACTION BUTTON -->
+                    <div class="pt-3">
+                        <button type="button" onclick="openModal()"
+                                class="w-full bg-[#ab1f2b] hover:bg-white hover:text-gray-900 text-white text-xs font-extrabold py-3 px-4 rounded-xl uppercase tracking-wider transition-all duration-300 shadow-lg shadow-red-950 flex items-center justify-center gap-2 group cursor-pointer">
+                            <span>Get In Touch Now</span>
+                            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Bottom Copyright -->
+        <div class="mt-14 pt-8 border-t border-gray-800/80 text-xs text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© {% now "Y" %} {{ site.site_name|default:"Ozbix IT Solutions" }}. All Rights Reserved.</p>
+            <div class="flex items-center gap-4">
+                <a href="javascript:void(0)" onclick="openModal()" class="hover:text-white transition">Get In Touch</a>
+                <span>•</span>
+                <a href="{% url 'portfolio' %}" class="hover:text-white transition">Portfolio</a>
+                <span>•</span>
+                <a href="https://wa.me/{{ site.whatsapp_number|default:'923175448546'|cut:' '|cut:'+' }}" target="_blank" class="hover:text-emerald-400 transition">WhatsApp Support</a>
             </div>
         </div>
 
     </div>
 </footer>
-    
-</body>
-</html>

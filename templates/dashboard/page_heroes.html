@@ -1,0 +1,135 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% block content %}
+
+<div class="flex items-center justify-between">
+    <div>
+        <h2 class="text-xl font-bold text-white">Page Heroes Management</h2>
+        <p class="text-xs text-slate-400">Har page ka heading, description, image aur button control karein</p>
+    </div>
+    <button onclick="openModal('addModal')" class="btn-red flex items-center gap-2">
+        <i class="fa-solid fa-plus"></i> Add / Update Hero
+    </button>
+</div>
+
+<!-- Heroes Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% if heroes %}
+        {% for h in heroes %}
+        <div class="g-card overflow-hidden {% if not h.is_active %}opacity-50{% endif %}">
+            <!-- Image Preview -->
+            {% if h.image %}
+            <div class="h-32 overflow-hidden relative">
+                <img src="{{ h.image.url }}" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0" style="background: linear-gradient(to top, #1a0e0f, transparent);"></div>
+            </div>
+            {% else %}
+            <div class="h-32 flex items-center justify-center" style="background: rgba(171,31,43,.08);">
+                <i class="fa-solid fa-image text-3xl text-ozbix-800"></i>
+            </div>
+            {% endif %}
+            <div class="p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border border-ozbix-700/40 text-ozbix-300"
+                          style="background: rgba(171,31,43,.12);">
+                        {{ h.get_page_display }}
+                    </span>
+                    <span class="text-[10px] font-semibold {% if h.is_active %}text-green-400{% else %}text-slate-500{% endif %}">
+                        {% if h.is_active %}Active{% else %}Hidden{% endif %}
+                    </span>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-white leading-tight">{{ h.heading|truncatechars:40 }}</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">{{ h.subheading|truncatechars:50 }}</p>
+                </div>
+                <div class="flex gap-1.5 pt-2 border-t border-[rgba(171,31,43,.1)]">
+                    <!-- Toggle -->
+                    <form method="POST" class="flex-1">{% csrf_token %}
+                        <input type="hidden" name="action" value="toggle">
+                        <input type="hidden" name="hero_id" value="{{ h.id }}">
+                        <button class="btn-slate w-full text-[10px]">
+                            {% if h.is_active %}Hide{% else %}Show{% endif %}
+                        </button>
+                    </form>
+                    <!-- Delete -->
+                    <form method="POST" onsubmit="return confirm('Delete?')">{% csrf_token %}
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="hero_id" value="{{ h.id }}">
+                        <button class="px-3 py-1 rounded-lg text-[10px] font-semibold text-rose-400 border border-rose-500/20 bg-rose-950/20">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-span-full g-card p-12 text-center space-y-2">
+            <i class="fa-solid fa-file-image text-3xl text-slate-700 block mb-2"></i>
+            <p class="text-sm font-bold text-white">Koi page hero nahi</p>
+            <p class="text-xs text-slate-400">Har service page ke liye dynamic heading aur image set karein</p>
+            <button onclick="openModal('addModal')" class="btn-red mt-3 inline-flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Pehla Hero Add Karein
+            </button>
+        </div>
+    {% endif %}
+</div>
+
+<!-- ADD MODAL -->
+<div id="addModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden modal-wrap p-4">
+    <div class="w-full max-w-lg rounded-2xl p-6 space-y-4 relative"
+         style="background: #1a0e0f; border: 1px solid rgba(171,31,43,.3); box-shadow: 0 24px 48px -8px rgba(0,0,0,.8);">
+        <div class="flex items-center justify-between border-b border-[rgba(171,31,43,.15)] pb-4">
+            <h3 class="text-base font-bold text-white">Add / Update Page Hero</h3>
+            <button onclick="closeModal('addModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form method="POST" enctype="multipart/form-data" class="space-y-3">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Page</label>
+                <select name="page" required class="form-input">
+                    {% for val, label in page_choices %}
+                    <option value="{{ val }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Heading</label>
+                <input type="text" name="heading" class="form-input" placeholder="Main heading text">
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Sub Heading</label>
+                <input type="text" name="subheading" class="form-input" placeholder="Tagline ya sub-heading">
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Description</label>
+                <textarea name="description" rows="2" class="form-input" placeholder="Mukhtasar parichai..."></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="text-[11px] font-bold text-slate-400 block mb-1">Button Text</label>
+                    <input type="text" name="button_text" class="form-input" value="Get Started">
+                </div>
+                <div>
+                    <label class="text-[11px] font-bold text-slate-400 block mb-1">Button Link</label>
+                    <input type="text" name="button_link" class="form-input" value="#">
+                </div>
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Hero Image (optional)</label>
+                <input type="file" name="image" accept="image/*" class="form-input text-slate-300">
+            </div>
+            <div class="flex gap-2 pt-2 border-t border-[rgba(171,31,43,.12)]">
+                <button type="button" onclick="closeModal('addModal')" class="btn-slate flex-1">Cancel</button>
+                <button type="submit" class="btn-red flex-1">Save Hero</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+function openModal(id){document.getElementById(id).classList.remove('hidden');}
+function closeModal(id){document.getElementById(id).classList.add('hidden');}
+</script>
+{% endblock %}

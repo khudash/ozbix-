@@ -1,0 +1,134 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% block content %}
+
+<div class="flex items-center justify-between">
+    <div>
+        <h2 class="text-xl font-bold text-white">Testimonials Management</h2>
+        <p class="text-xs text-slate-400">Client reviews jo website par dikhain ge</p>
+    </div>
+    <button onclick="openModal('addModal')" class="btn-red flex items-center gap-2">
+        <i class="fa-solid fa-plus"></i> Add Testimonial
+    </button>
+</div>
+
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% if testimonials %}
+        {% for t in testimonials %}
+        <div class="g-card p-5 space-y-3 {% if not t.is_active %}opacity-50{% endif %}">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+                     style="border: 2px solid rgba(171,31,43,.4);">
+                    {% if t.avatar %}
+                    <img src="{{ t.avatar.url }}" alt="" class="w-full h-full object-cover">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center font-bold text-sm text-white"
+                         style="background: linear-gradient(135deg,#cc2535,#771d24);">
+                        {{ t.client_name|first|upper }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-white leading-none">{{ t.client_name }}</p>
+                    <p class="text-[11px] text-slate-400">{{ t.company }}{% if t.country %}, {{ t.country }}{% endif %}</p>
+                </div>
+                <!-- Stars -->
+                <div class="ml-auto flex gap-0.5">
+                    {% for i in "12345" %}
+                    <i class="fa-solid fa-star text-xs {% if forloop.counter <= t.rating %}text-yellow-400{% else %}text-slate-700{% endif %}"></i>
+                    {% endfor %}
+                </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 italic">"{{ t.message }}"</p>
+            <div class="flex items-center justify-between pt-2 border-t border-[rgba(171,31,43,.12)]">
+                <span class="text-[10px] font-semibold {% if t.is_active %}text-green-400{% else %}text-slate-500{% endif %}">
+                    {% if t.is_active %}Active{% else %}Hidden{% endif %}
+                </span>
+                <div class="flex gap-1.5">
+                    <!-- Toggle -->
+                    <form method="POST">{% csrf_token %}
+                        <input type="hidden" name="action" value="toggle">
+                        <input type="hidden" name="t_id" value="{{ t.id }}">
+                        <button class="btn-slate px-2 py-1 text-[10px]">
+                            {% if t.is_active %}Hide{% else %}Show{% endif %}
+                        </button>
+                    </form>
+                    <!-- Delete -->
+                    <form method="POST" onsubmit="return confirm('Delete?')">{% csrf_token %}
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="t_id" value="{{ t.id }}">
+                        <button class="px-2 py-1 rounded-lg text-[10px] font-semibold text-rose-400 border border-rose-500/20 bg-rose-950/20 hover:bg-rose-950/40">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-span-full g-card p-12 text-center space-y-2">
+            <i class="fa-solid fa-star text-3xl text-slate-700 block mb-2"></i>
+            <p class="text-sm font-bold text-white">Koi testimonial nahi</p>
+            <p class="text-xs text-slate-400">Client reviews add karein jo website par show honge</p>
+            <button onclick="openModal('addModal')" class="btn-red mt-3 inline-flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Pehla Testimonial Add Karein
+            </button>
+        </div>
+    {% endif %}
+</div>
+
+<!-- ADD MODAL -->
+<div id="addModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden modal-wrap p-4">
+    <div class="w-full max-w-md rounded-2xl p-6 space-y-4 relative"
+         style="background: #1a0e0f; border: 1px solid rgba(171,31,43,.3); box-shadow: 0 24px 48px -8px rgba(0,0,0,.8);">
+        <div class="flex items-center justify-between border-b border-[rgba(171,31,43,.15)] pb-4">
+            <h3 class="text-base font-bold text-white">Add Testimonial</h3>
+            <button onclick="closeModal('addModal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form method="POST" enctype="multipart/form-data" class="space-y-3">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Client Name</label>
+                <input type="text" name="client_name" required class="form-input" placeholder="e.g. Ahmed Khan">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="text-[11px] font-bold text-slate-400 block mb-1">Company</label>
+                    <input type="text" name="company" class="form-input" placeholder="Company name">
+                </div>
+                <div>
+                    <label class="text-[11px] font-bold text-slate-400 block mb-1">Country</label>
+                    <input type="text" name="country" class="form-input" placeholder="Pakistan">
+                </div>
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Rating (1–5)</label>
+                <select name="rating" class="form-input">
+                    <option value="5">5 Stars ⭐⭐⭐⭐⭐</option>
+                    <option value="4">4 Stars ⭐⭐⭐⭐</option>
+                    <option value="3">3 Stars ⭐⭐⭐</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Message / Review</label>
+                <textarea name="message" rows="3" required class="form-input" placeholder="Client ka feedback..."></textarea>
+            </div>
+            <div>
+                <label class="text-[11px] font-bold text-slate-400 block mb-1">Avatar (optional)</label>
+                <input type="file" name="avatar" accept="image/*" class="form-input text-slate-300 file:btn-red file:mr-2 file:rounded-lg file:border-0 file:text-xs">
+            </div>
+            <div class="flex gap-2 pt-2 border-t border-[rgba(171,31,43,.12)]">
+                <button type="button" onclick="closeModal('addModal')" class="btn-slate flex-1">Cancel</button>
+                <button type="submit" class="btn-red flex-1">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+function openModal(id){document.getElementById(id).classList.remove('hidden');}
+function closeModal(id){document.getElementById(id).classList.add('hidden');}
+</script>
+{% endblock %}

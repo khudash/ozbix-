@@ -1,0 +1,278 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% block content %}
+
+<!-- Welcome Banner -->
+<div class="relative overflow-hidden rounded-2xl p-6 md:p-8 border border-ozbix-700/30 stat-glow"
+     style="background: linear-gradient(135deg, #1a0e0f 0%, #2a0f14 50%, #1a0e0f 100%);">
+    <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full blur-3xl pointer-events-none"
+         style="background: rgba(171,31,43,.12);"></div>
+    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-ozbix-700/40 text-ozbix-300"
+                 style="background: rgba(171,31,43,.15);">
+                <i class="fa-solid fa-bolt text-ozbix-400"></i> Ozbix Custom Control Center
+            </div>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+                Welcome back, {{ request.user.username|default:"Admin" }}!
+            </h2>
+            <p class="text-slate-400 text-sm max-w-xl leading-relaxed">
+                Manage your Ozbix website — services, portfolio, banners, client logos, testimonials, and real-time inquiries all from one place.
+            </p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+            <a href="{% url 'dashboard_messages' %}"
+               class="btn-red flex items-center gap-2">
+                <i class="fa-solid fa-envelope"></i> View Inquiries
+            </a>
+            <a href="{% url 'dashboard_page_heroes' %}"
+               class="btn-slate flex items-center gap-2">
+                <i class="fa-solid fa-file-image text-ozbix-400"></i> Page Heroes
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- KPI Cards -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    {% with cards=services_count|stringformat:"s" %}
+    {% endwith %}
+
+    <!-- Services -->
+    <div class="g-card p-4 stat-glow">
+        <div class="w-9 h-9 rounded-xl mb-3 flex items-center justify-center"
+             style="background: rgba(171,31,43,.15); border: 1px solid rgba(171,31,43,.25);">
+            <i class="fa-solid fa-layer-group text-ozbix-400"></i>
+        </div>
+        <p class="text-2xl font-extrabold text-white">{{ services_count }}</p>
+        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">Services</p>
+        <a href="{% url 'dashboard_services' %}" class="text-[10px] text-ozbix-400 hover:text-ozbix-300 mt-2 inline-block font-semibold">
+            Manage →
+        </a>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="g-card p-4">
+        <div class="w-9 h-9 rounded-xl mb-3 flex items-center justify-center"
+             style="background: rgba(171,31,43,.1); border: 1px solid rgba(171,31,43,.2);">
+            <i class="fa-solid fa-briefcase text-ozbix-500"></i>
+        </div>
+        <p class="text-2xl font-extrabold text-white">{{ portfolio_count }}</p>
+        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">Portfolio</p>
+        <a href="{% url 'dashboard_portfolio' %}" class="text-[10px] text-ozbix-400 hover:text-ozbix-300 mt-2 inline-block font-semibold">
+            Manage →
+        </a>
+    </div>
+
+    <!-- Clients -->
+    <div class="g-card p-4">
+        <div class="w-9 h-9 rounded-xl mb-3 flex items-center justify-center"
+             style="background: rgba(171,31,43,.1); border: 1px solid rgba(171,31,43,.2);">
+            <i class="fa-solid fa-user-group text-ozbix-500"></i>
+        </div>
+        <p class="text-2xl font-extrabold text-white">{{ clients_count }}</p>
+        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">Clients</p>
+        <a href="{% url 'dashboard_clients' %}" class="text-[10px] text-ozbix-400 hover:text-ozbix-300 mt-2 inline-block font-semibold">
+            Manage →
+        </a>
+    </div>
+
+    <!-- Banners -->
+    <div class="g-card p-4">
+        <div class="w-9 h-9 rounded-xl mb-3 flex items-center justify-center"
+             style="background: rgba(171,31,43,.1); border: 1px solid rgba(171,31,43,.2);">
+            <i class="fa-solid fa-images text-ozbix-500"></i>
+        </div>
+        <p class="text-2xl font-extrabold text-white">{{ banners_count }}</p>
+        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">Banners</p>
+        <a href="{% url 'dashboard_banners' %}" class="text-[10px] text-ozbix-400 hover:text-ozbix-300 mt-2 inline-block font-semibold">
+            Manage →
+        </a>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="g-card p-4">
+        <div class="w-9 h-9 rounded-xl mb-3 flex items-center justify-center"
+             style="background: rgba(171,31,43,.1); border: 1px solid rgba(171,31,43,.2);">
+            <i class="fa-solid fa-star text-ozbix-500"></i>
+        </div>
+        <p class="text-2xl font-extrabold text-white">{{ testimonials_count }}</p>
+        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">Testimonials</p>
+        <a href="{% url 'dashboard_testimonials' %}" class="text-[10px] text-ozbix-400 hover:text-ozbix-300 mt-2 inline-block font-semibold">
+            Manage →
+        </a>
+    </div>
+
+    <!-- Messages -->
+    <div class="g-card p-4">
+        <div class="w-9 h-9 rounded-xl mb-3 flex items-center justify-center"
+             style="background: rgba(171,31,43,.15); border: 1px solid rgba(171,31,43,.3);">
+            <i class="fa-solid fa-envelope text-ozbix-400"></i>
+        </div>
+        <p class="text-2xl font-extrabold text-white">{{ messages_count }}</p>
+        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">Inquiries
+            {% if unread_count > 0 %}
+            <span class="ml-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-ozbix-700 text-white">{{ unread_count }} new</span>
+            {% endif %}
+        </p>
+        <a href="{% url 'dashboard_messages' %}" class="text-[10px] text-ozbix-400 hover:text-ozbix-300 mt-2 inline-block font-semibold">
+            View →
+        </a>
+    </div>
+</div>
+
+<!-- Chart + DB Info -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+    <!-- Chart -->
+    <div class="lg:col-span-2 g-card p-5 space-y-3">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-sm font-bold text-white">Inquiry Analytics</h3>
+                <p class="text-[11px] text-slate-500">Monthly contact form submissions</p>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full border border-ozbix-700/30 text-ozbix-400"
+                  style="background: rgba(171,31,43,.1);">Live</span>
+        </div>
+        <div class="h-56"><canvas id="inquiryChart"></canvas></div>
+    </div>
+
+    <!-- DB Info -->
+    <div class="g-card p-5 flex flex-col justify-between space-y-4">
+        <div>
+            <div class="flex items-center gap-3 pb-4 border-b border-[rgba(171,31,43,.15)]">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+                     style="background: rgba(171,31,43,.15); border: 1px solid rgba(171,31,43,.3);">
+                    <i class="fa-solid fa-database text-ozbix-400 text-lg"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-white">PostgreSQL</p>
+                    <p class="text-[10px] text-slate-400">Database Engine — SQLite Removed</p>
+                </div>
+            </div>
+            <div class="mt-4 space-y-2 text-[11px]">
+                <div class="flex justify-between py-1 border-b border-[rgba(255,255,255,.04)]">
+                    <span class="text-slate-400">Script:</span>
+                    <span class="text-ozbix-400 font-mono">postgray.sql</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-[rgba(255,255,255,.04)]">
+                    <span class="text-slate-400">Database:</span>
+                    <span class="text-slate-200 font-mono">ozbix_db</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-[rgba(255,255,255,.04)]">
+                    <span class="text-slate-400">Host:</span>
+                    <span class="text-slate-200 font-mono">localhost:5432</span>
+                </div>
+                <div class="flex justify-between py-1">
+                    <span class="text-slate-400">Driver:</span>
+                    <span class="text-green-400 font-bold">psycopg2 ✓</span>
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'dashboard_db_status' %}"
+           class="btn-slate flex items-center justify-center gap-2 w-full text-center">
+            <i class="fa-solid fa-code text-ozbix-400"></i> View SQL Instructions
+        </a>
+    </div>
+</div>
+
+<!-- Recent Inquiries Table -->
+<div class="g-card p-5 space-y-4">
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="text-sm font-bold text-white">Recent Client Inquiries</h3>
+            <p class="text-[11px] text-slate-500">Latest messages from the website contact form</p>
+        </div>
+        <a href="{% url 'dashboard_messages' %}"
+           class="text-xs font-semibold text-ozbix-400 hover:text-ozbix-300 flex items-center gap-1">
+            View all <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-left">Client</th>
+                    <th class="text-left">Email</th>
+                    <th class="text-left">Service</th>
+                    <th class="text-left">Date</th>
+                    <th class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if recent_inquiries %}
+                    {% for msg in recent_inquiries %}
+                    <tr>
+                        <td class="font-bold text-white">
+                            <div class="flex items-center gap-2">
+                                <div class="w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs text-white"
+                                     style="background: linear-gradient(135deg,var(--red-light),var(--red-dark));">
+                                    {{ msg.full_name|first|upper }}
+                                </div>
+                                {{ msg.full_name }}
+                            </div>
+                        </td>
+                        <td class="font-mono text-slate-300">{{ msg.email }}</td>
+                        <td>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border border-ozbix-700/30 text-ozbix-300"
+                                  style="background: rgba(171,31,43,.1);">
+                                {{ msg.services|truncatechars:25|default:"General" }}
+                            </span>
+                        </td>
+                        <td class="text-slate-500 text-[11px]">{{ msg.created_at|date:"M d, Y" }}</td>
+                        <td class="text-center">
+                            {% if msg.is_read %}
+                            <span class="px-2 py-0.5 rounded-full text-[10px] border border-slate-700 text-slate-400">Read</span>
+                            {% else %}
+                            <span class="px-2 py-0.5 rounded-full text-[10px] border border-ozbix-700/40 text-ozbix-300 font-bold animate-pulse"
+                                  style="background: rgba(171,31,43,.15);">New</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="5" class="py-8 text-center text-slate-500">
+                        <i class="fa-solid fa-inbox text-2xl block mb-2 text-slate-700"></i>
+                        Abhi koi inquiry nahi aayi. Website ka contact form test karein!
+                    </td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('inquiryChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'],
+            datasets: [{
+                label: 'Inquiries',
+                data: [3, 6, 10, 16, 12, 22, 28, 24, 30, {{ messages_count|default:15 }}],
+                borderColor: '#ab1f2b',
+                backgroundColor: 'rgba(171,31,43,.12)',
+                borderWidth: 2.5,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#cc2535',
+                pointRadius: 4,
+                pointHoverRadius: 7,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { color: '#64748b', font: { size: 10 } } },
+                y: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { color: '#64748b', font: { size: 10 } } }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

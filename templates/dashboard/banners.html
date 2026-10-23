@@ -1,0 +1,101 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block content %}
+
+<!-- HEADER & ADD BUTTON -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h2 class="text-xl font-bold text-white tracking-tight">Homepage Banners</h2>
+        <p class="text-xs text-slate-400">Upload hero banner slides and images displayed on the main landing page</p>
+    </div>
+
+    <button onclick="openModal('addBannerModal')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-lg shadow-brand-600/30 transition-all flex items-center space-x-2 self-start sm:self-auto">
+        <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+        <span>Upload New Banner</span>
+    </button>
+</div>
+
+<!-- BANNERS GRID -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% if banners %}
+        {% for banner in banners %}
+        <div class="glass-card rounded-2xl overflow-hidden group flex flex-col justify-between">
+            <div class="relative h-52 bg-slate-900 overflow-hidden">
+                {% if banner.image %}
+                <img src="{{ banner.image.url }}" alt="Banner Image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                {% else %}
+                <div class="w-full h-full flex items-center justify-center text-slate-600">
+                    <i class="fa-solid fa-image text-3xl"></i>
+                </div>
+                {% endif %}
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-70"></div>
+                <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-slate-300">
+                    ID #{{ banner.id }}
+                </span>
+            </div>
+
+            <div class="p-4 flex items-center justify-between border-t border-slate-800">
+                <span class="text-xs font-semibold text-slate-300">Banner Slider Image</span>
+                
+                <form method="POST" action="{% url 'dashboard_banners' %}" onsubmit="return confirm('Delete this hero banner?');">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="banner_id" value="{{ banner.id }}">
+                    <button type="submit" class="p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors" title="Delete Banner">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-span-full glass-panel p-12 rounded-2xl text-center space-y-3">
+            <i class="fa-solid fa-images text-4xl text-slate-600 mb-2 block"></i>
+            <h3 class="text-base font-bold text-white">No Banners Found</h3>
+            <p class="text-xs text-slate-400 max-w-sm mx-auto">Upload banner images to display in your website hero carousel slider.</p>
+            <button onclick="openModal('addBannerModal')" class="mt-2 px-4 py-2 rounded-xl bg-brand-600 text-white font-semibold text-xs inline-flex items-center space-x-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Upload First Banner</span>
+            </button>
+        </div>
+    {% endif %}
+</div>
+
+<!-- ADD BANNER MODAL -->
+<div id="addBannerModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-md rounded-2xl border border-slate-700/80 shadow-2xl p-6 space-y-5 relative">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                <i class="fa-solid fa-image text-brand-400"></i>
+                <span>Upload Banner Image</span>
+            </h3>
+            <button onclick="closeModal('addBannerModal')" class="text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <form method="POST" action="{% url 'dashboard_banners' %}" enctype="multipart/form-data" class="space-y-4 text-xs">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1">Banner Image File</label>
+                <input type="file" name="image" accept="image/*" required class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs focus:outline-none file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-600 file:text-white hover:file:bg-brand-500">
+            </div>
+
+            <div class="pt-3 border-t border-slate-800 flex items-center justify-end space-x-3">
+                <button type="button" onclick="closeModal('addBannerModal')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">Cancel</button>
+                <button type="submit" class="px-5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-600/30">Upload Banner</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+</script>
+{% endblock %}

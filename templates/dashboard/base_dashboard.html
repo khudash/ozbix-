@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page_title %}{{ page_title }} — {% endif %}Ozbix Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ozbix: {
+                            50:  '#fdf2f3',
+                            100: '#fce4e6',
+                            200: '#f9ced1',
+                            300: '#f4a8ad',
+                            400: '#ec7580',
+                            500: '#e04455',
+                            600: '#cc2535',
+                            700: '#ab1f2b',   /* ← Primary Brand Color */
+                            800: '#8e1d27',
+                            900: '#771d24',
+                            950: '#420a0e',
+                        },
+                    },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --red:       #ab1f2b;
+            --red-dark:  #8e1d27;
+            --red-light: #cc2535;
+            --bg:        #0f0a0b;
+            --card:      #1a0e0f;
+            --card2:     #211214;
+            --border:    rgba(171,31,43,0.18);
+            --border2:   rgba(255,255,255,0.06);
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: #f1f5f9;
+        }
+        /* Sidebar */
+        .sidebar { background: #130b0c; border-right: 1px solid var(--border); }
+        /* Glass card */
+        .g-card {
+            background: linear-gradient(135deg, rgba(26,14,15,.9) 0%, rgba(21,11,12,.95) 100%);
+            border: 1px solid var(--border2);
+            border-radius: 1rem;
+            transition: all .25s ease;
+        }
+        .g-card:hover {
+            border-color: rgba(171,31,43,.35);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px -6px rgba(171,31,43,.18);
+        }
+        /* Nav item */
+        .nav-item {
+            display: flex; align-items: center; gap: .75rem;
+            padding: .65rem .85rem;
+            border-radius: .75rem;
+            font-size: .8rem; font-weight: 500;
+            color: #94a3b8;
+            transition: all .2s ease;
+            text-decoration: none;
+        }
+        .nav-item:hover  { background: rgba(171,31,43,.15); color: #fff; }
+        .nav-item.active { background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); color: #fff; font-weight: 700; box-shadow: 0 6px 18px -4px rgba(171,31,43,.45); }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #1a0e0f; }
+        ::-webkit-scrollbar-thumb { background: rgba(171,31,43,.4); border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--red); }
+        /* Input */
+        .form-input {
+            width: 100%; padding: .6rem .9rem; border-radius: .65rem;
+            background: rgba(0,0,0,.35); border: 1px solid rgba(171,31,43,.25);
+            color: #f1f5f9; font-size: .8rem; outline: none;
+            transition: border-color .2s;
+        }
+        .form-input:focus { border-color: var(--red); }
+        /* Btn */
+        .btn-red {
+            padding: .55rem 1.2rem; border-radius: .65rem;
+            background: linear-gradient(135deg, var(--red-light) 0%, var(--red-dark) 100%);
+            color: #fff; font-weight: 700; font-size: .78rem;
+            transition: all .2s ease; border: none; cursor: pointer;
+            box-shadow: 0 4px 14px -3px rgba(171,31,43,.45);
+        }
+        .btn-red:hover { filter: brightness(1.12); transform: translateY(-1px); }
+        .btn-slate {
+            padding: .55rem 1.1rem; border-radius: .65rem;
+            background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+            color: #cbd5e1; font-weight: 600; font-size: .78rem;
+            cursor: pointer; transition: all .2s ease;
+        }
+        .btn-slate:hover { background: rgba(255,255,255,.12); color: #fff; }
+        /* Modal backdrop */
+        .modal-wrap { display: flex; align-items: center; justify-content: center; }
+        /* Table */
+        table { width: 100%; border-collapse: collapse; }
+        thead th { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: #64748b; padding: .65rem 1rem; border-bottom: 1px solid rgba(171,31,43,.15); }
+        tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); transition: background .15s; }
+        tbody tr:hover { background: rgba(171,31,43,.06); }
+        tbody td { padding: .7rem 1rem; font-size: .8rem; color: #cbd5e1; }
+        /* stat card glow */
+        .stat-glow { box-shadow: 0 0 0 1px rgba(171,31,43,.2), 0 8px 24px -6px rgba(171,31,43,.15); }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="min-h-screen flex">
+
+    <!-- Mobile backdrop -->
+    <div id="mobileBackdrop" onclick="toggleSidebar()"
+         class="fixed inset-0 bg-black/60 z-40 lg:hidden hidden"></div>
+
+    <!-- ═══════ SIDEBAR ═══════ -->
+    <aside id="sidebar"
+           class="sidebar fixed lg:static inset-y-0 left-0 z-50 w-64 flex flex-col
+                  transition-transform duration-300 -translate-x-full lg:translate-x-0 overflow-y-auto">
+
+        <!-- Brand -->
+        <div class="h-16 flex items-center justify-between px-5 border-b border-[rgba(171,31,43,.2)]">
+            <a href="{% url 'dashboard_index' %}" class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-lg text-white"
+                     style="background: linear-gradient(135deg,#cc2535,#771d24); box-shadow: 0 4px 14px -3px rgba(171,31,43,.6)">
+                    O
+                </div>
+                <div>
+                    <p class="text-sm font-extrabold text-white tracking-wide leading-none">OZBIX</p>
+                    <p class="text-[10px] text-ozbix-400 font-semibold">Admin Panel</p>
+                </div>
+            </a>
+            <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- DB Badge -->
+        <div class="mx-4 my-3 px-3 py-2.5 rounded-xl bg-ozbix-950/60 border border-ozbix-700/30 flex items-center gap-2.5">
+            <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ozbix-400 opacity-60"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-ozbix-500"></span>
+            </span>
+            <div class="min-w-0">
+                <p class="text-[10px] font-bold text-ozbix-300 leading-none">PostgreSQL Active</p>
+                <p class="text-[9px] text-slate-400 truncate mt-0.5">{{ active_db }}</p>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex-1 px-3 pb-4 space-y-0.5">
+
+            <p class="px-2 pt-3 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-600">Main</p>
+            <a href="{% url 'dashboard_index' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_index' %}active{% endif %}">
+                <i class="fa-solid fa-chart-pie w-4 text-center"></i> Overview
+            </a>
+
+            <a href="{% url 'dashboard_messages' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_messages' %}active{% endif %} justify-between">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-envelope w-4 text-center"></i> Messages
+                </span>
+                {% if unread_count > 0 %}
+                <span class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-ozbix-700 text-white animate-pulse">
+                    {{ unread_count }}
+                </span>
+                {% endif %}
+            </a>
+
+            <p class="px-2 pt-4 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-600">Content</p>
+            <a href="{% url 'dashboard_services' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_services' %}active{% endif %}">
+                <i class="fa-solid fa-layer-group w-4 text-center"></i> Services
+            </a>
+            <a href="{% url 'dashboard_portfolio' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_portfolio' %}active{% endif %}">
+                <i class="fa-solid fa-briefcase w-4 text-center"></i> Portfolio
+            </a>
+            <a href="{% url 'dashboard_banners' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_banners' %}active{% endif %}">
+                <i class="fa-solid fa-images w-4 text-center"></i> Banners
+            </a>
+            <a href="{% url 'dashboard_clients' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_clients' %}active{% endif %}">
+                <i class="fa-solid fa-user-group w-4 text-center"></i> Client Logos
+            </a>
+            <a href="{% url 'dashboard_testimonials' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_testimonials' %}active{% endif %}">
+                <i class="fa-solid fa-star w-4 text-center"></i> Testimonials
+            </a>
+            <a href="{% url 'dashboard_page_heroes' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_page_heroes' %}active{% endif %}">
+                <i class="fa-solid fa-file-image w-4 text-center"></i> Page Heroes
+            </a>
+
+            <p class="px-2 pt-4 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-600">Settings</p>
+            <a href="{% url 'dashboard_site_settings' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_site_settings' %}active{% endif %}">
+                <i class="fa-solid fa-sliders w-4 text-center"></i> Site Settings
+            </a>
+            <a href="{% url 'dashboard_account' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_account' %}active{% endif %}">
+                <i class="fa-solid fa-user-shield w-4 text-center"></i> Admin Account
+            </a>
+            <a href="{% url 'dashboard_db_status' %}"
+               class="nav-item {% if request.resolver_match.url_name == 'dashboard_db_status' %}active{% endif %}">
+                <i class="fa-solid fa-database w-4 text-center"></i> PostgreSQL Setup
+            </a>
+        </nav>
+
+        <!-- Footer user card -->
+        <div class="p-3 border-t border-[rgba(171,31,43,.15)] space-y-2.5">
+            <a href="{% url 'home' %}" target="_blank"
+               class="flex items-center justify-center gap-1.5 w-full py-2 rounded-lg border border-ozbix-800/40 bg-ozbix-950/30 text-slate-400 hover:text-white hover:border-ozbix-600/50 text-xs font-semibold transition-all">
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> View Website
+            </a>
+            <div class="flex items-center justify-between px-1">
+                <a href="{% url 'dashboard_account' %}" class="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs"
+                         style="background: linear-gradient(135deg, var(--red-light), var(--red-dark));">
+                        {{ request.user.username|first|upper|default:"A" }}
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white leading-none">{{ request.user.username|default:"Admin" }}</p>
+                        <p class="text-[10px] text-slate-500">Administrator</p>
+                    </div>
+                </a>
+                <a href="{% url 'dashboard_logout' %}" title="Logout"
+                   class="p-1.5 rounded-lg text-slate-500 hover:text-ozbix-400 hover:bg-ozbix-950/50 transition-colors">
+                    <i class="fa-solid fa-right-from-bracket text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ═══════ MAIN CONTENT ═══════ -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+
+        <!-- Top Header -->
+        <header class="h-16 sticky top-0 z-30 flex items-center justify-between px-5
+                       border-b border-[rgba(171,31,43,.15)]"
+                style="background: rgba(15,10,11,.85); backdrop-filter: blur(14px);">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white
+                               bg-ozbix-950/40 border border-ozbix-800/30">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <h1 class="text-base font-extrabold text-white tracking-tight leading-none">
+                        {{ page_title|default:"Dashboard" }}
+                    </h1>
+                    <p class="text-[11px] text-slate-500 hidden sm:block">Ozbix IT Solutions — Admin Control Panel</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- DB pill -->
+                <div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full
+                            border border-ozbix-800/40 text-[11px]"
+                     style="background: rgba(15,10,11,.6)">
+                    <i class="fa-solid fa-database text-ozbix-500 text-[10px]"></i>
+                    <span class="text-slate-300 font-mono">PostgreSQL</span>
+                </div>
+                <!-- Bell -->
+                <a href="{% url 'dashboard_messages' %}"
+                   class="relative p-2 rounded-xl text-slate-400 hover:text-white border border-ozbix-800/30
+                          bg-ozbix-950/30 hover:border-ozbix-600/50 transition-all">
+                    <i class="fa-solid fa-bell text-sm"></i>
+                    {% if unread_count > 0 %}
+                    <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] font-bold
+                                 flex items-center justify-center text-white bg-ozbix-700">
+                        {{ unread_count }}
+                    </span>
+                    {% endif %}
+                </a>
+                <!-- Avatar -->
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                     style="background: linear-gradient(135deg, var(--red-light), var(--red-dark));">
+                    {{ request.user.username|first|upper|default:"A" }}
+                </div>
+            </div>
+        </header>
+
+        <!-- Flash Messages -->
+        {% if messages %}
+        <div class="px-5 pt-4 space-y-2">
+            {% for message in messages %}
+            <div class="flex items-center justify-between p-3.5 rounded-xl text-xs border
+                {% if message.tags == 'error' %}border-rose-500/40 bg-rose-950/40 text-rose-200
+                {% elif message.tags == 'success' %}border-ozbix-700/40 bg-ozbix-950/40 text-ozbix-200
+                {% else %}border-slate-700/40 bg-slate-900/40 text-slate-200{% endif %}">
+                <div class="flex items-center gap-2.5">
+                    <i class="{% if message.tags == 'error' %}fa-solid fa-circle-exclamation text-rose-400
+                              {% elif message.tags == 'success' %}fa-solid fa-circle-check text-ozbix-400
+                              {% else %}fa-solid fa-circle-info text-slate-400{% endif %}"></i>
+                    <span>{{ message }}</span>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-slate-500 hover:text-white ml-4">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Page Content -->
+        <main class="flex-1 p-5 space-y-6">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="px-5 py-3 border-t border-[rgba(171,31,43,.12)]
+                       flex flex-col sm:flex-row items-center justify-between gap-2
+                       text-[11px] text-slate-600">
+            <span>&copy; 2026 Ozbix IT Solutions. Custom Admin Dashboard.</span>
+            <span class="font-mono">PostgreSQL — Django 6.0</span>
+        </footer>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const s = document.getElementById('sidebar');
+            const b = document.getElementById('mobileBackdrop');
+            s.classList.toggle('-translate-x-full');
+            b.classList.toggle('hidden');
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

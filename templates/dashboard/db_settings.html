@@ -1,0 +1,151 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block content %}
+
+<!-- HEADER -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h2 class="text-xl font-bold text-white tracking-tight">Database Settings & PostgreSQL Setup</h2>
+        <p class="text-xs text-slate-400">PostgreSQL configuration status, connection parameters, and database schema scripts</p>
+    </div>
+
+    <div class="flex items-center space-x-2">
+        {% if is_postgres %}
+        <span class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center space-x-2">
+            <i class="fa-solid fa-check-circle text-emerald-400"></i>
+            <span>PostgreSQL Active</span>
+        </span>
+        {% else %}
+        <span class="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center space-x-2">
+            <i class="fa-solid fa-database text-amber-400"></i>
+            <span>SQLite Active (PostgreSQL Ready)</span>
+        </span>
+        {% endif %}
+    </div>
+</div>
+
+<!-- CURRENT DB CONFIG CARDS -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    
+    <div class="glass-card p-5 rounded-2xl space-y-2">
+        <span class="text-xs text-slate-400 font-semibold uppercase">Engine</span>
+        <h3 class="text-base font-bold text-white font-mono truncate">{{ db_config.ENGINE|slice:"19:" }}</h3>
+        <p class="text-[11px] text-brand-400 font-mono">{% if is_postgres %}django.db.backends.postgresql{% else %}django.db.backends.sqlite3{% endif %}</p>
+    </div>
+
+    <div class="glass-card p-5 rounded-2xl space-y-2">
+        <span class="text-xs text-slate-400 font-semibold uppercase">Database Name</span>
+        <h3 class="text-base font-bold text-white font-mono truncate">{{ db_config.NAME }}</h3>
+        <p class="text-[11px] text-slate-400">Target PostgreSQL DB</p>
+    </div>
+
+    <div class="glass-card p-5 rounded-2xl space-y-2">
+        <span class="text-xs text-slate-400 font-semibold uppercase">Host / Port</span>
+        <h3 class="text-base font-bold text-white font-mono truncate">{{ db_config.HOST|default:"127.0.0.1" }}:{{ db_config.PORT|default:"5432" }}</h3>
+        <p class="text-[11px] text-slate-400">Localhost Connection</p>
+    </div>
+
+    <div class="glass-card p-5 rounded-2xl space-y-2">
+        <span class="text-xs text-slate-400 font-semibold uppercase">PostgreSQL User</span>
+        <h3 class="text-base font-bold text-white font-mono truncate">{{ db_config.USER|default:"postgres" }}</h3>
+        <p class="text-[11px] text-slate-400">Database Role Owner</p>
+    </div>
+
+</div>
+
+<!-- POSTGRESQL INSTRUCTIONS & .ENV CONFIG -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    
+    <!-- Step-by-Step Instructions -->
+    <div class="glass-panel p-6 rounded-2xl space-y-4">
+        <h3 class="text-base font-bold text-white flex items-center space-x-2">
+            <i class="fa-solid fa-list-check text-brand-400"></i>
+            <span>How to Connect PostgreSQL (postgray.sql)</span>
+        </h3>
+        
+        <div class="space-y-4 text-xs text-slate-300">
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <div class="flex items-center space-x-2 font-bold text-white">
+                    <span class="w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">1</span>
+                    <span>Install & Start PostgreSQL Service</span>
+                </div>
+                <p class="text-slate-400 pl-7 text-[11px]">
+                    Ensure PostgreSQL is installed on your system (e.g. pgAdmin or PostgreSQL server running on port 5432).
+                </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+                <div class="flex items-center space-x-2 font-bold text-white">
+                    <span class="w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">2</span>
+                    <span>Create Database & Run postgray.sql</span>
+                </div>
+                <p class="text-slate-400 pl-7 text-[11px]">
+                    Run the provided <code>postgray.sql</code> script in psql or pgAdmin:
+                </p>
+                <div class="pl-7">
+                    <pre class="p-2.5 rounded-lg bg-slate-950 text-indigo-300 font-mono text-[11px] overflow-x-auto">psql -U postgres -c "CREATE DATABASE ozbix_db;"
+psql -U postgres -d ozbix_db -f postgray.sql</pre>
+                </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
+                <div class="flex items-center space-x-2 font-bold text-white">
+                    <span class="w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">3</span>
+                    <span>Run Django Migrations</span>
+                </div>
+                <div class="pl-7">
+                    <pre class="p-2.5 rounded-lg bg-slate-950 text-indigo-300 font-mono text-[11px] overflow-x-auto">python manage.py migrate</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Environment .env File Details -->
+    <div class="glass-panel p-6 rounded-2xl space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                <i class="fa-solid fa-file-code text-indigo-400"></i>
+                <span>.env Configuration File</span>
+            </h3>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 border border-brand-500/30">Active</span>
+        </div>
+
+        <p class="text-xs text-slate-400">
+            The project reads these settings directly from the <code>.env</code> file in the project root:
+        </p>
+
+        <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-emerald-400 font-mono text-xs overflow-x-auto leading-relaxed">USE_POSTGRES=True
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=ozbix_db
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=127.0.0.1
+DB_PORT=5432</pre>
+
+        <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs space-y-1">
+            <p class="font-bold flex items-center space-x-1">
+                <i class="fa-solid fa-database text-emerald-400"></i>
+                <span>Direct PostgreSQL Integration:</span>
+            </p>
+            <p class="text-slate-300 text-[11px]">
+                SQLite has been completely removed. Your application, custom dashboard, and all dynamic content run directly on your PostgreSQL database engine!
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- POSTGRAY.SQL FILE PREVIEW -->
+<div class="glass-panel p-6 rounded-2xl space-y-4">
+    <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-white flex items-center space-x-2">
+            <i class="fa-solid fa-code text-emerald-400"></i>
+            <span>postgray.sql Schema Script Content</span>
+        </h3>
+        <span class="text-xs text-slate-400 font-mono">ozbix-/postgray.sql</span>
+    </div>
+
+    <pre class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 font-mono text-xs overflow-x-auto max-h-96 custom-scrollbar leading-relaxed">{% if sql_content %}{{ sql_content }}{% else %}postgray.sql file located at project root.{% endif %}</pre>
+</div>
+
+{% endblock %}

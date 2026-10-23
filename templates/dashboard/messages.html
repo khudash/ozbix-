@@ -1,0 +1,236 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block content %}
+
+<!-- HEADER & UNREAD STAT -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h2 class="text-xl font-bold text-white tracking-tight">Contact Inquiries & Messages</h2>
+        <p class="text-xs text-slate-400">View and respond to client inquiries received from your website form</p>
+    </div>
+
+    <div class="flex items-center space-x-3">
+        <span class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 border border-slate-700 text-xs font-semibold">
+            Total: {{ submissions|length }}
+        </span>
+        {% if unread_count > 0 %}
+        <span class="px-3 py-1.5 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold animate-pulse">
+            {{ unread_count }} Unread
+        </span>
+        {% endif %}
+    </div>
+<!-- EMAIL SMTP STATUS & QUICK TEST TOOL -->
+<div class="glass-panel p-4 rounded-2xl border border-ozbix-800/40 bg-slate-900/60 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-ozbix-600/20 border border-ozbix-500/30 text-ozbix-400 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-envelope-circle-check text-lg"></i>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>Notification Email:</span>
+                <span class="text-xs font-mono text-ozbix-300 font-semibold">{{ email_host_user }}</span>
+            </h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">
+                SMTP Server: <code class="text-slate-300">smtp.gmail.com:587 (TLS)</code> • Authentication: <code class="text-slate-300">Google 16-char App Password</code>
+            </p>
+        </div>
+    </div>
+    <form method="POST" action="{% url 'dashboard_messages' %}" class="flex items-center gap-2 w-full md:w-auto">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="test_email">
+        <input type="email" name="test_email_address" value="{{ email_host_user }}" placeholder="Test recipient email" required
+               class="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white outline-none focus:border-ozbix-500 w-full sm:w-60 font-mono">
+        <button type="submit"
+                class="px-4 py-2 rounded-xl bg-ozbix-600 hover:bg-ozbix-500 text-white text-xs font-bold transition flex items-center gap-1.5 shrink-0 shadow-lg shadow-ozbix-600/30 cursor-pointer">
+            <i class="fa-solid fa-paper-plane text-[10px]"></i> Send Test Email
+        </button>
+    </form>
+</div>
+
+<!-- MESSAGES TABLE CONTAINER -->
+<div class="glass-panel p-6 rounded-2xl space-y-4">
+    <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left text-xs">
+            <thead>
+                <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider font-semibold">
+                    <th class="py-3 px-4">Client Name</th>
+                    <th class="py-3 px-4">Contact Info</th>
+                    <th class="py-3 px-4">Selected Services</th>
+                    <th class="py-3 px-4">Submission Date</th>
+                    <th class="py-3 px-4 text-center">Read Status</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                {% if submissions %}
+                    {% for msg in submissions %}
+                    <tr class="hover:bg-slate-800/40 transition-colors {% if not msg.is_read %}bg-brand-950/20 font-medium{% endif %}">
+                        <td class="py-4 px-4 font-bold text-white">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full {% if not msg.is_read %}bg-brand-600 text-white shadow-md shadow-brand-600/30{% else %}bg-slate-800 text-slate-400{% endif %} flex items-center justify-center font-bold text-xs">
+                                    {{ msg.full_name|first|upper }}
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-white">{{ msg.full_name }}</p>
+                                    <p class="text-[10px] text-slate-400 font-mono">ID #{{ msg.id }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        
+                        <td class="py-4 px-4">
+                            <p class="font-mono text-slate-200">{{ msg.email }}</p>
+                            {% if msg.phone %}
+                            <p class="text-[11px] text-slate-400"><i class="fa-solid fa-phone text-[9px] mr-1"></i>{{ msg.phone }}</p>
+                            {% endif %}
+                        </td>
+
+                        <td class="py-4 px-4">
+                            <span class="px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-[11px]">
+                                {{ msg.services|default:"General Inquiry" }}
+                            </span>
+                        </td>
+
+                        <td class="py-4 px-4 text-slate-400 text-[11px]">
+                            {{ msg.created_at|date:"M d, Y - H:i" }}
+                        </td>
+
+                        <td class="py-4 px-4 text-center">
+                            <form method="POST" action="{% url 'dashboard_messages' %}" class="inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="toggle_read">
+                                <input type="hidden" name="msg_id" value="{{ msg.id }}">
+                                {% if msg.is_read %}
+                                <button type="submit" class="px-2.5 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 text-[10px] font-semibold transition-colors" title="Click to mark unread">
+                                    Read
+                                </button>
+                                {% else %}
+                                <button type="submit" class="px-2.5 py-0.5 rounded-full bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 text-[10px] font-bold animate-pulse transition-colors" title="Click to mark read">
+                                    New
+                                </button>
+                                {% endif %}
+                            </form>
+                        </td>
+
+                        <td class="py-4 px-4 text-right space-x-1.5">
+                            <button onclick="viewMessage('{{ msg.id }}', '{{ msg.full_name|escapejs }}', '{{ msg.email|escapejs }}', '{{ msg.phone|escapejs }}', '{{ msg.services|escapejs }}', '{{ msg.message|escapejs }}', '{{ msg.created_at|date:"Y-m-d H:i" }}')" class="px-3 py-1.5 rounded-xl bg-brand-600/20 hover:bg-brand-600 text-brand-300 hover:text-white border border-brand-500/30 text-xs font-semibold transition-all">
+                                <i class="fa-solid fa-eye mr-1"></i> Read
+                            </button>
+
+                            <form method="POST" action="{% url 'dashboard_messages' %}" onsubmit="return confirm('Delete message?');" class="inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="msg_id" value="{{ msg.id }}">
+                                <button type="submit" class="p-1.5 rounded-xl bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors" title="Delete">
+                                    <i class="fa-solid fa-trash-can text-xs"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="py-12 text-center text-slate-500">
+                            <i class="fa-solid fa-inbox text-4xl mb-3 block text-slate-600"></i>
+                            <p class="text-sm font-semibold text-slate-300">No Inquiries Found</p>
+                            <p class="text-xs text-slate-400">Client form submissions from the website will appear here in real-time.</p>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- VIEW & REPLY MESSAGE MODAL -->
+<div id="viewMessageModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-xl rounded-2xl border border-slate-700/80 shadow-2xl p-6 space-y-5 relative">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+                <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-envelope-open text-brand-400"></i>
+                    <span>Inquiry Details</span>
+                </h3>
+                <p class="text-xs text-slate-400" id="msg_date"></p>
+            </div>
+            <button onclick="closeModal('viewMessageModal')" class="text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4 text-xs">
+            <div class="grid grid-cols-2 gap-3 p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                <div>
+                    <span class="text-slate-400 block text-[10px] uppercase font-semibold">Client Name</span>
+                    <span class="text-white font-bold text-sm" id="msg_name"></span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-[10px] uppercase font-semibold">Email</span>
+                    <span class="text-brand-300 font-mono" id="msg_email"></span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-[10px] uppercase font-semibold">Phone</span>
+                    <span class="text-slate-200" id="msg_phone"></span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-[10px] uppercase font-semibold">Interested Services</span>
+                    <span class="text-indigo-300 font-semibold" id="msg_services"></span>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-slate-400 text-[10px] uppercase font-semibold mb-1">Message Content</label>
+                <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 text-slate-200 leading-relaxed whitespace-pre-line text-xs font-sans min-h-[100px]" id="msg_text"></div>
+            </div>
+
+            <!-- REPLY FORM SECTION -->
+            <div class="pt-3 border-t border-slate-800 space-y-3">
+                <h4 class="text-xs font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-reply text-indigo-400"></i>
+                    <span>Send Quick Email Reply</span>
+                </h4>
+                
+                <form method="POST" action="{% url 'dashboard_messages' %}" class="space-y-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="reply">
+                    <input type="hidden" name="msg_id" id="reply_msg_id">
+
+                    <div>
+                        <input type="text" name="reply_subject" value="Re: Your Inquiry to Ozbix" required class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-brand-500">
+                    </div>
+
+                    <div>
+                        <textarea name="reply_body" rows="3" placeholder="Type your email response here..." required class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-brand-500"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-3">
+                        <button type="button" onclick="closeModal('viewMessageModal')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">Close</button>
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 flex items-center space-x-2">
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                            <span>Send Email Reply</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    
+    function viewMessage(id, name, email, phone, services, message, date) {
+        document.getElementById('reply_msg_id').value = id;
+        document.getElementById('msg_name').innerText = name;
+        document.getElementById('msg_email').innerText = email;
+        document.getElementById('msg_phone').innerText = phone || 'N/A';
+        document.getElementById('msg_services').innerText = services || 'General Inquiry';
+        document.getElementById('msg_text').innerText = message;
+        document.getElementById('msg_date').innerText = 'Submitted on ' + date;
+        openModal('viewMessageModal');
+    }
+</script>
+{% endblock %}

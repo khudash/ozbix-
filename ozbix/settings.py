@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-guo)ufhimw$g5j^1-melwn=acy=6l*8@8ph2nzrqcegf*!n7(l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -70,15 +70,39 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ozbix.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+import os
+from dotenv import load_dotenv
+
+load_dotenv(BASE_DIR / '.env')
+
+# ============================================================
+# DATABASE — Pure PostgreSQL (SQLite completely removed)
+# Loaded from .env
+# ============================================================
+
+DB_NAME     = os.getenv('DB_NAME',     'oxbix')
+DB_USER     = os.getenv('DB_USER',     'postgres')
+DB_PASSWORD = os.getenv('DB_PASSWORD', '2460')
+DB_HOST     = os.getenv('DB_HOST',     'localhost')
+DB_PORT     = os.getenv('DB_PORT',     '5432')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE':   'django.db.backends.postgresql',
+        'NAME':     DB_NAME,
+        'USER':     DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST':     DB_HOST,
+        'PORT':     DB_PORT,
     }
 }
+ACTIVE_DB_NAME = f"PostgreSQL ({DB_NAME}@{DB_HOST})"
+IS_POSTGRES_CONNECTED = True
+
+LOGIN_URL           = '/dashboard/login/'
+LOGIN_REDIRECT_URL  = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/dashboard/login/'
+
 
 
 # Password validation
@@ -124,14 +148,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ================= EMAIL SETTINGS =================
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() in ("true", "1", "yes")
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "khudashkhan489@gmail.com")
+_raw_email_pass = os.getenv("EMAIL_HOST_PASSWORD", "xkue mkjm nmlq koej")
+# Automatically strip any spaces or quotes from Google App Password
+EMAIL_HOST_PASSWORD = _raw_email_pass.replace(" ", "").replace('"', '').replace("'", "").strip() if _raw_email_pass else ""
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = "khudashkhan489@gmail.com"
-EMAIL_HOST_PASSWORD = "xkue mkjm nmlq koej"
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+EMAIL_ADMIN_RECIPIENT = os.getenv("EMAIL_ADMIN_RECIPIENT", EMAIL_HOST_USER)
