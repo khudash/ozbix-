@@ -51,64 +51,72 @@
 
     <!--===================== Our Services =========================== -->
 
-<section class="container mx-auto py-8 px-4 md:px-6 lg:px-9">
+<section class="w-full py-16 md:py-24 px-4 md:px-6 lg:px-9 bg-gradient-to-b from-[#faf7f7] via-[#fff5f5] to-[#fbf8f8] border-b border-gray-100 relative overflow-hidden" id="our-services-section">
+  <!-- Floating Animated Gradient Spheres (Smooth Moving Keyframe Animation) -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+    <div class="floating-blob-1 absolute -top-16 -left-16 w-[28rem] h-[28rem] bg-gradient-to-tr from-[#ab1f2b]/20 to-rose-400/20 rounded-full blur-[90px]"></div>
+    <div class="floating-blob-2 absolute top-1/2 -right-20 w-[30rem] h-[30rem] bg-gradient-to-bl from-red-600/15 to-amber-500/10 rounded-full blur-[100px]"></div>
+    <div class="floating-blob-3 absolute -bottom-20 left-1/3 w-[26rem] h-[26rem] bg-gradient-to-r from-rose-500/15 to-[#ab1f2b]/20 rounded-full blur-[90px]"></div>
+    <div class="absolute inset-0 opacity-[0.4]" style="background-image: radial-gradient(#ab1f2b 1.2px, transparent 1.2px); background-size: 32px 32px;"></div>
+  </div>
+  <!-- Live Particle Canvas Network -->
+  <canvas id="services-particle-canvas" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 2;"></canvas>
+
+  <div class="container mx-auto relative z-10">
     <div>
-       <h1 class="text-center text-4xl md:text-6xl lg:text-8xl py-8 md:py-10 text-red-900 font-bold min-h-[120px] md:h-40 w-full">Our services</h1>
-       
-      <p class="text-center py-5 md:py-7 text-sm md:text-base">Empower your business with our comprehensive IT solutions. From software development to network security, we provide <br> tailored services to drive your success.</p>
+       <h1 class="text-center text-4xl md:text-6xl lg:text-7xl py-6 md:py-8 text-red-900 font-bold min-h-[100px] w-full">Our services</h1>
+       <p class="text-center pb-8 text-sm md:text-base text-gray-600 max-w-3xl mx-auto">Empower your business with our comprehensive IT solutions. From software development to network security, we provide tailored services to drive your success.</p>
     </div>
-<div class="swiper myServices p-4 md:p-8 lg:ml-10">
-    <div class="swiper-wrapper">
 
-  <!--== Cards ==-->
-  {% for service in services %}
-
-<div class="swiper-slide bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300 flex flex-col justify-between">
-    <div>
-        <!-- Icon (Shopify and WordPress brand icons explicitly removed) -->
-        <div class="h-10 mb-4 flex items-center">
-            {% if service.icon_class and "shopify" not in service.icon_class|lower and "wordpress" not in service.icon_class|lower %}
-            <div class="text-3xl md:text-4xl text-[#ab1f2b]">
-                <i class="{{ service.icon_class }}"></i>
+    <div class="swiper myServices p-2 md:p-6 pb-14">
+      <div class="swiper-wrapper flex items-stretch">
+        {% for service in services %}
+        <div class="swiper-slide !h-auto flex">
+          <div class="w-full bg-white/95 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl hover:border-red-300 hover:-translate-y-2 border border-gray-100 p-7 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="h-12 mb-4 flex items-center justify-between">
+                <div class="w-12 h-12 rounded-xl bg-red-50 text-[#ab1f2b] flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-[#ab1f2b] group-hover:text-white transition duration-300">
+                  {% if service.icon_class and "shopify" not in service.icon_class|lower and "wordpress" not in service.icon_class|lower %}
+                    <i class="{{ service.icon_class }}"></i>
+                  {% else %}
+                    <i class="fa-solid fa-layer-group"></i>
+                  {% endif %}
+                </div>
+                <span class="text-xs font-mono font-bold text-gray-300">0{{ forloop.counter }}</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-[#ab1f2b] transition-colors line-clamp-1">{{ service.title }}</h3>
+              <h5 class="text-[#ab1f2b] font-semibold mb-3 text-xs uppercase tracking-wider line-clamp-1">{{ service.short_description }}</h5>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 min-h-[4.5rem]">{{ service.description }}</p>
             </div>
-            {% endif %}
+            <div class="pt-4 border-t border-gray-100 mt-auto">
+              <a href="{% if 'shopify' in service.title|lower %}{% url 'shopify' %}{% elif 'wordpress' in service.title|lower %}{% url 'wordpress' %}{% elif 'marketing' in service.title|lower %}{% url 'marketing' %}{% elif 'seo' in service.title|lower %}{% url 'seo' %}{% elif 'graphic' in service.title|lower %}{% url 'graphic_design' %}{% elif 'software' in service.title|lower %}{% url 'software_services' %}{% else %}{% url 'webdesign' %}{% endif %}"
+                 class="text-[#ab1f2b] hover:text-black font-bold text-sm inline-flex items-center gap-1.5 transition group">
+                 <span>{{ service.button_text|default:"Read More" }}</span>
+                 <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+            </div>
+          </div>
         </div>
-
-        <!-- Title -->
-        <h3 class="text-xl md:text-2xl font-bold mb-2 text-gray-900">
-            {{ service.title }}
-        </h3>
-
-        <!-- Short Description -->
-        <h5 class="text-gray-800 font-medium mb-3 text-sm">
-            {{ service.short_description }}
-        </h5>
-
-        <!-- Description -->
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">
-            {{ service.description }}
-        </p>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination !bottom-0"></div>
     </div>
-
-    <!-- Working Navigation Button -->
-    <a href="{% if 'shopify' in service.title|lower %}{% url 'shopify' %}{% elif 'wordpress' in service.title|lower %}{% url 'wordpress' %}{% elif 'marketing' in service.title|lower %}{% url 'marketing' %}{% elif 'seo' in service.title|lower %}{% url 'seo' %}{% elif 'graphic' in service.title|lower %}{% url 'graphic_design' %}{% elif 'software' in service.title|lower %}{% url 'software_services' %}{% else %}{% url 'webdesign' %}{% endif %}"
-       class="text-[#ab1f2b] hover:text-black font-bold text-sm inline-flex items-center gap-1.5 mt-2 transition group">
-       <span>{{ service.button_text|default:"Read More" }}</span>
-       <span class="group-hover:translate-x-1 transition-transform">→</span>
-    </a>
-</div>
-{% endfor %}
-
- </div>
-    <div class="swiper-pagination"></div>
- </div>
+  </div>
 </section>
-
 <!--========================== Ozbix folio ============================ -->
 
-<section class="relative w-full py-16 md:py-24 bg-black  overflow-hidden">
-   <img class="absolute inset-0 w-full h-full  object-cover opacity-20" src="{% static 'images/portfolio.webp' %}" alt=""Portfolio Background"">
-  <div class="relative z-10 max-w-4xl mx-auto text-center px-4 md:px-6">
+<section class="relative w-full py-16 md:py-24 bg-gradient-to-b from-[#090b0e] via-[#120a0d] to-[#090b0e] text-white overflow-hidden border-b border-gray-900">
+  
+  <!-- Ambient Deep Glow & Subtle Dot Texture Background -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+    <div class="absolute -top-24 -left-20 w-96 h-96 bg-[#ab1f2b]/20 rounded-full blur-[130px] animate-pulse" style="animation-duration: 9s;"></div>
+    <div class="absolute top-1/2 -right-24 w-[32rem] h-[32rem] bg-rose-600/15 rounded-full blur-[140px] animate-pulse" style="animation-duration: 12s;"></div>
+    <div class="absolute -bottom-24 left-1/4 w-96 h-96 bg-red-700/15 rounded-full blur-[120px] animate-pulse" style="animation-duration: 10s;"></div>
+    <div class="absolute inset-0 opacity-[0.25]" style="background-image: radial-gradient(rgba(244, 63, 94, 0.4) 1.2px, transparent 1.2px); background-size: 36px 36px;"></div>
+    <img class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-screen pointer-events-none" src="{% static 'images/portfolio.webp' %}" alt="">
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto text-center px-4 md:px-6 mb-12">
     <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
       Ozbix Folio
     </h1>
@@ -119,82 +127,60 @@
       client expectations.
     </p>
   </div>
-</section>
 
-  <!-- ============= ozbix images =============== -->
-
-  <section class="relative  py-20 overflow-hidden">
-    <img class="absolute inset-0 w-full h-full object-cover opacity-80" src="{% static 'images/portfolio.webp' %}" alt="">
-  <div class="absolute inset-0 bg-black/70"></div>
+  <!--=== Portfolio Grid (Exact Original Cards) ===-->
   <div class="relative z-10 max-w-7xl mx-auto px-6">
-
-    <!--=== Portfolio Grid ===-->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-16">
-
-    {% comment %} ==== cards ===== {% endcomment %}
-
-     {% for folio in ozbix_folios %}
- <div class="cards text-center">
-    <img src="{{ folio.image.url }}"
-         alt="{{ folio.title }}"
-         class="rounded-xl w-full h-64 object-cover hover:scale-105 transition duration-300">
-
-    <h3 class="text-white text-xl mt-4 font-medium">
-        {{ folio.title }}
-    </h3>
- </div>
-    {% endfor %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {% for folio in ozbix_folios %}
+      <div class="cards text-center group">
+        <div class="rounded-xl overflow-hidden bg-black/40 border border-white/10 group-hover:border-red-500/50 shadow-lg transition-all duration-300">
+          <img src="{{ folio.image.url }}"
+               alt="{{ folio.title }}"
+               class="rounded-xl w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <h3 class="text-white text-xl mt-4 font-medium group-hover:text-red-400 transition-colors">
+            {{ folio.title }}
+        </h3>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 
+
 <!--=============================== About us ====================================  -->
 
-<section class="relative max-w-7xl mx-auto px-8 py-16">
- <img class="absolute inset-0 w-full h-full opacity-20"  src="{% static 'images/About_software_bg_img (1).webp' %}" alt="">
-  <div class="flex flex-col lg:flex-row items-center gap-12">
-   <img src="{% static 'images/image-copy.webp' %}" alt="">
-
-    
-    <!--== Right Side Content ==-->
-    <div class="lg:w-1/2">
-      <h4 class="text-red-700 text-7xl font-bold mb-8">
-        <img src="{% static 'images/heading_icon_img.webp' %}" alt="">
-        About Us
-      </h4>
-
-      <h2 class="text-3xl font-bold mb-4">
-        Our Success Secret
-      </h2>
-
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-semibold text-red-700">
-            Commitment to Quality
-          </h3>
-          <p class="text-gray-600 mt-2">
-            We prioritize excellence in every aspect of our work, ensuring high standards of quality.
-          </p>
+<section class="relative w-full py-16 sm:py-20 md:py-24 bg-gradient-to-b from-[#faf7f7] via-[#fff5f5] to-[#fbf8f8] border-b border-gray-100 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+    <div class="absolute -top-20 -left-20 w-80 h-80 bg-[#ab1f2b]/10 rounded-full blur-[100px]"></div>
+    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-rose-400/10 rounded-full blur-[110px]"></div>
+    <div class="absolute inset-0 opacity-[0.35]" style="background-image: radial-gradient(#ab1f2b 1px, transparent 1px); background-size: 32px 32px;"></div>
+  </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+     <img src="{% static 'images/image-copy.webp' %}" class="rounded-2xl max-w-full h-auto drop-shadow-md" alt="">
+      <div class="lg:w-1/2">
+        <h4 class="text-red-700 text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 flex items-center gap-3">
+          <img src="{% static 'images/heading_icon_img.webp' %}" class="w-10 sm:w-14" alt="">
+          About Us
+        </h4>
+        <h2 class="text-3xl font-bold mb-4">
+          Our Success Secret
+        </h2>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-semibold text-red-700">Commitment to Quality</h3>
+            <p class="text-gray-600 mt-2">We prioritize excellence in every aspect of our work, ensuring high standards of quality.</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-red-700">Innovation at the Core</h3>
+            <p class="text-gray-600 mt-2">Embracing innovation fuels creativity and helps us stay ahead.</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-red-700">Customer-Centric Approach</h3>
+            <p class="text-gray-600 mt-2">We understand our clients' needs and deliver tailored solutions.</p>
+          </div>
         </div>
-
-        <div>
-          <h3 class="text-2xl font-semibold text-red-700">
-            Innovation at the Core
-          </h3>
-          <p class="text-gray-600 mt-2">
-            Embracing innovation fuels creativity and helps us stay ahead.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-semibold text-red-700">
-            Customer-Centric Approach
-          </h3>
-          <p class="text-gray-600 mt-2">
-            We understand our clients' needs and deliver tailored solutions.
-          </p>
-        </div>
-
       </div>
     </div>
   </div>
@@ -230,39 +216,34 @@
   </div>
 
 </section>
-<!-- =========================== Customers rewview ============================ -->
+<!-- =========================== Customers Reviews ============================ -->
 
-<section>
+<section class="relative w-full py-12 bg-gradient-to-b from-[#faf7f7] via-[#fff5f5] to-[#fbf8f8] border-b border-gray-100 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+    <div class="absolute -top-20 -left-20 w-80 h-80 bg-[#ab1f2b]/10 rounded-full blur-[100px]"></div>
+    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-rose-400/10 rounded-full blur-[110px]"></div>
+    <div class="absolute inset-0 opacity-[0.3]" style="background-image: radial-gradient(#ab1f2b 1px, transparent 1px); background-size: 32px 32px;"></div>
+  </div>
  <div>
-   <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold py-2 text-center mt-10">Our Customers Reviews</h1>
-   <p class="text-gray-800 text-center text-sm md:text-base">Hear What Our Customers Have to Say.</p>
-     <div class="flex flex-col lg:flex-row items-center gap-4 bg-white p-6 rounded-lg w-full lg:w-fit">
-  <div class="py-20 bg-gray-50 ml-0 lg:ml-36">
+   <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold py-2 text-center mt-6 text-gray-900">Our Customers Reviews</h1>
+   <p class="text-gray-600 text-center text-sm md:text-base">Hear What Our Customers Have to Say.</p>
+     <div class="flex flex-col lg:flex-row items-center gap-4 bg-transparent p-6 rounded-lg w-full lg:w-fit relative z-10">
+  <div class="py-14 bg-transparent ml-0 lg:ml-36">
     <div class="max-w-7xl mx-auto px-5">
 
             <!-- Left Rating -->
             <div class="text-center lg:text-left">
-
-                <img src="{% static 'images/Favicon-5.webp' %}" 
-                    class="w-20 mx-auto lg:mx-0 mb-4" alt="">
-
-                <h2 class="text-3xl font-bold text-gray-900">
-                    4.9 ⭐⭐⭐⭐⭐
-                </h2>
-
-                <p class="text-gray-500 mt-2">
-                    Based on 62 Reviews
-                </p>
-
+                <img src="{% static 'images/Favicon-5.webp' %}" class="w-20 mx-auto lg:mx-0 mb-4" alt="">
+                <h2 class="text-3xl font-bold text-gray-900">4.9 ⭐⭐⭐⭐⭐</h2>
+                <p class="text-gray-500 mt-2">Based on 62 Reviews</p>
             </div>
 
             <!-- Right Testimonials -->
             <div class="lg:col-span-3 mt-10">
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-
                     {% if testimonials %}
                         {% for t in testimonials %}
-                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full flex flex-col justify-between">
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md border border-gray-100 hover:border-red-200 transition duration-300 w-full flex flex-col justify-between">
                             <div>
                                 <div class="flex items-center gap-3 mb-4">
                                     {% if t.avatar %}
@@ -272,30 +253,18 @@
                                             {{ t.client_name|slice:":1" }}
                                         </div>
                                     {% endif %}
-
                                     <div>
-                                        <h3 class="font-semibold text-gray-900">
-                                            {{ t.client_name }}
-                                        </h3>
-                                        <p class="text-xs text-gray-500">
-                                            {{ t.company }}{% if t.country %} · {{ t.country }}{% endif %}
-                                        </p>
+                                        <h3 class="font-semibold text-gray-900">{{ t.client_name }}</h3>
+                                        <p class="text-xs text-gray-500">{{ t.company }}{% if t.country %} · {{ t.country }}{% endif %}</p>
                                     </div>
                                 </div>
-
-                                <div class="text-red-500 text-sm mb-3">
-                                    {% for i in "12345"|slice:t.rating %}★{% endfor %}
-                                </div>
-
-                                <p class="text-gray-600 text-sm leading-6">
-                                    {{ t.message }}
-                                </p>
+                                <div class="text-red-500 text-sm mb-3">{% for i in "12345"|slice:t.rating %}★{% endfor %}</div>
+                                <p class="text-gray-600 text-sm leading-6">{{ t.message }}</p>
                             </div>
                         </div>
                         {% endfor %}
                     {% else %}
-                        <!-- Default Fallback Card 1 -->
-                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md border border-gray-100 hover:border-red-200 transition duration-300 w-full">
                             <div class="flex items-center gap-3 mb-4">
                                 <img src="{% static 'images/HF_-_LOGO_NEW (2).webp' %}" class="w-16 h-8 object-contain">
                                 <div>
@@ -306,9 +275,7 @@
                             <div class="text-red-500 text-lg mb-3">★★★★★</div>
                             <p class="text-gray-600 leading-7">Ozbix delivered an outstanding solution with excellent communication and timely delivery. Highly recommended for professional web development services.</p>
                         </div>
-
-                        <!-- Default Fallback Card 2 -->
-                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md border border-gray-100 hover:border-red-200 transition duration-300 w-full">
                             <div class="flex items-center gap-3 mb-4">
                                 <img src="{% static 'images/10.webp' %}" class="w-12 h-12 rounded-full object-cover">
                                 <div>
@@ -319,9 +286,7 @@
                             <div class="text-red-500 text-lg mb-3">★★★★★</div>
                             <p class="text-gray-600 leading-7">The team created a scalable platform that improved our workflow and increased user engagement significantly.</p>
                         </div>
-
-                        <!-- Default Fallback Card 3 -->
-                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border w-full">
+                        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md border border-gray-100 hover:border-red-200 transition duration-300 w-full">
                             <div class="flex items-center gap-3 mb-4">
                                 <img src="{% static 'images/19-1.webp' %}" class="w-12 h-12 rounded-full object-cover">
                                 <div>
@@ -333,14 +298,12 @@
                             <p class="text-gray-600 leading-7">Ozbix exceeded expectations with quality work, responsive support and excellent project management.</p>
                         </div>
                     {% endif %}
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 </section>
-<hr>
 <!-- ================================ Work With Global ============================== -->
 
 <section class="py-10">
@@ -461,52 +424,81 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
-            <!-- ===== Left Side ===== -->
+            <!-- ===== Left Side (Auto-Scrolling Chat Messages) ===== -->
 
-            <div class="w-full max-w-md lg:w-[430px] bg-white shadow-lg p-4 rounded-lg lg:ml-20 lg:mb-20">
-                <div class="space-y-4">
-                    <div class="flex justify-start">
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
-                            <p class="font-semibold">Hi! Sure</p>
-                            <p class="mt-2 text-gray-700 text-sm sm:text-base">
-                                We offer website development and digital marketing.
-                                What do you need?
-                            </p>
-                        </div>
+            <div class="w-full max-w-md lg:w-[430px] bg-white shadow-xl p-5 rounded-2xl lg:ml-20 lg:mb-10 border border-red-50">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-100">
+                    <div class="flex items-center gap-2">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-xs font-bold text-gray-800">Live Support Chat</span>
                     </div>
+                    <span class="text-[11px] font-medium text-gray-400">Online</span>
+                </div>
 
-                    <div class="flex justify-end">
-                        <div class="bg-red-700 text-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
-                            <p class="text-sm sm:text-base">
-                                Hi, I want to know about your services.
-                            </p>
+                <!-- Chat Scroll Viewport -->
+                <div id="chat-messages-scroll" class="h-[520px] overflow-hidden relative pr-1 scroll-smooth">
+                    <div id="chat-messages-track" class="space-y-4 transition-transform duration-700 ease-in-out">
+                        
+                        <!-- Message 1 -->
+                        <div class="chat-msg flex justify-start">
+                            <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-xs sm:max-w-sm">
+                                <p class="font-semibold text-xs text-[#ab1f2b] mb-1">Ozbix Support</p>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    Hi! Sure, we offer bespoke website development, Shopify solutions and digital marketing. What do you need?
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex justify-start">
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
-                            <p class="font-semibold">Great to hear!</p>
-                            <p class="mt-2 text-gray-700 text-sm sm:text-base">
-                                We offer website development and digital marketing.
-                                What do you need?
-                            </p>
+                        <!-- Message 2 -->
+                        <div class="chat-msg flex justify-end">
+                            <div class="bg-[#ab1f2b] text-white p-4 rounded-2xl rounded-tr-sm shadow-sm max-w-xs sm:max-w-sm">
+                                <p class="text-sm leading-relaxed">
+                                    Hi, I want to know about your services and sprint timelines.
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex justify-end">
-                        <div class="bg-red-700 text-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
-                            <p class="text-sm sm:text-base">
-                                You're welcome! Let me know if you need more information.
-                            </p>
+                        <!-- Message 3 -->
+                        <div class="chat-msg flex justify-start">
+                            <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-xs sm:max-w-sm">
+                                <p class="font-semibold text-xs text-[#ab1f2b] mb-1">Ozbix Architect</p>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    Great to hear! Our standard delivery sprint is 2-4 weeks with continuous updates and dedicated QA.
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex justify-start">
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-md max-w-xs sm:max-w-sm">
-                            <p class="text-sm sm:text-base">
-                                Okay, I'll check the website. Your response has been very helpful.
-                            </p>
+                        <!-- Message 4 -->
+                        <div class="chat-msg flex justify-end">
+                            <div class="bg-[#ab1f2b] text-white p-4 rounded-2xl rounded-tr-sm shadow-sm max-w-xs sm:max-w-sm">
+                                <p class="text-sm leading-relaxed">
+                                    Sounds perfect! Can we schedule a quick discovery call?
+                                </p>
+                            </div>
                         </div>
+
+                        <!-- Message 5 -->
+                        <div class="chat-msg flex justify-start">
+                            <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-xs sm:max-w-sm">
+                                <p class="font-semibold text-xs text-[#ab1f2b] mb-1">Ozbix Support</p>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    Absolutely! You're welcome to connect anytime. Our technical team is available 24/7.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Message 6 -->
+                        <div class="chat-msg flex justify-end">
+                            <div class="bg-[#ab1f2b] text-white p-4 rounded-2xl rounded-tr-sm shadow-sm max-w-xs sm:max-w-sm">
+                                <p class="text-sm leading-relaxed">
+                                    Okay, I'll submit my requirements now. Your response has been very helpful!
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -523,21 +515,21 @@
 
                     <!-- Card 1 -->
                     <div class="border rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-white to-red-100">
-                        <img src="images/watch.webp" class="w-10 sm:w-12 mb-6" alt="">
+                        <img src="{% static 'images/watch.webp' %}" class="w-10 sm:w-12 mb-6" alt="">
                         <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">90s</h3>
                         <p>Average Response Time</p>
                     </div>
 
                     <!-- Card 2 -->
                     <div class="border rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-white to-red-100">
-                        <img src="images/icon10.webp" class="w-10 sm:w-12 mb-6" alt="">
+                        <img src="{% static 'images/icon10.webp' %}" class="w-10 sm:w-12 mb-6" alt="">
                         <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">96%</h3>
                         <p>Client Satisfaction Score</p>
                     </div>
 
                     <!-- Card 3 -->
                     <div class="border rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-white to-red-100">
-                        <img src="images/avatar.webp" class="w-10 sm:w-12 mb-6" alt="">
+                        <img src="{% static 'images/avatar.webp' %}" class="w-10 sm:w-12 mb-6" alt="">
                         <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">24/7</h3>
                         <p>Ozbix Support</p>
                     </div>
@@ -638,7 +630,7 @@ const swiper = new Swiper(".myServices", {
     spaceBetween: 25,
 
     autoplay: {
-        delay: 2500,
+        delay: 2000,
         disableOnInteraction: false,
     },
 
@@ -662,6 +654,167 @@ const swiper = new Swiper(".myServices", {
         },
     },
 });
+</script>
+
+<style>
+/* Smooth Floating Background Animation */
+@keyframes floatBlob1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.08); }
+}
+@keyframes floatBlob2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-50px, -35px) scale(1.1); }
+}
+@keyframes floatBlob3 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(35px, -30px) scale(0.95); }
+}
+.floating-blob-1 { animation: floatBlob1 12s ease-in-out infinite; }
+.floating-blob-2 { animation: floatBlob2 15s ease-in-out infinite; }
+.floating-blob-3 { animation: floatBlob3 14s ease-in-out infinite; }
+</style>
+
+<script>
+// Interactive Canvas Particle Animation for Services Background
+(function() {
+  const canvas = document.getElementById("services-particle-canvas");
+  const section = document.getElementById("our-services-section");
+  if (!canvas || !section) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let width = 0, height = 0, particles = [], animationId = null;
+  const mouse = { x: null, y: null, radius: 150 };
+
+  function resize() {
+    width = canvas.width = section.offsetWidth;
+    height = canvas.height = section.offsetHeight;
+    init();
+  }
+
+  function init() {
+    particles = [];
+    const count = Math.min(Math.max(Math.floor((width * height) / 18000), 30), 75);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 2.2 + 1.2,
+        alpha: Math.random() * 0.4 + 0.25,
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      // Mouse interaction
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < mouse.radius) {
+          const angle = Math.atan2(dy, dx);
+          const force = (mouse.radius - dist) / mouse.radius;
+          p.x += Math.cos(angle) * force * 2;
+          p.y += Math.sin(angle) * force * 2;
+        }
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(171, 31, 43, " + p.alpha + ")";
+      ctx.fill();
+
+      // Connecting lines
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = "rgba(171, 31, 43, " + (0.22 * (1 - dist / 130)) + ")";
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+        }
+      }
+    }
+    animationId = requestAnimationFrame(draw);
+  }
+
+  section.addEventListener("mousemove", function(e) {
+    const rect = section.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  section.addEventListener("mouseleave", function() {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  window.addEventListener("resize", resize);
+  resize();
+  draw();
+})();
+</script>
+
+
+<script>
+// Non-Stop Infinite Auto-Scroll Up Every 2 Seconds
+(function continuousChatScroll() {
+    const scrollContainer = document.getElementById("chat-messages-scroll");
+    const track = document.getElementById("chat-messages-track");
+    if (!scrollContainer || !track) return;
+
+    // Clone all messages so it can scroll upwards forever seamlessly
+    track.innerHTML += track.innerHTML;
+
+    function moveUp() {
+        // Find height of the first message to shift smoothly
+        const firstMsg = track.querySelector(".chat-msg");
+        if (!firstMsg) return;
+
+        // Shift distance = height of message + 16px gap (space-y-4)
+        const shiftDistance = firstMsg.offsetHeight + 16;
+
+        scrollContainer.scrollBy({
+            top: shiftDistance,
+            behavior: "smooth"
+        });
+
+        // When scrolled past half (first set of messages), silently reset to top without jump
+        setTimeout(() => {
+            if (scrollContainer.scrollTop >= track.scrollHeight / 2) {
+                scrollContainer.scrollTop -= track.scrollHeight / 2;
+            }
+        }, 800);
+    }
+
+    // Trigger move up every 2 seconds (2000ms) repeatedly forever
+    let timer = setInterval(moveUp, 2000);
+
+    // Pause on mouse hover, resume on mouse leave
+    scrollContainer.addEventListener("mouseenter", () => clearInterval(timer));
+    scrollContainer.addEventListener("mouseleave", () => {
+        clearInterval(timer);
+        timer = setInterval(moveUp, 2000);
+    });
+})();
 </script>
 
 </body>

@@ -103,6 +103,11 @@ LOGIN_URL           = '/dashboard/login/'
 LOGIN_REDIRECT_URL  = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/dashboard/login/'
 
+# Session Security: Browser band hote hi session expire hoga taake dobara password mangey
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 7200  # 2 hours
+SESSION_COOKIE_HTTPONLY = True
+
 
 
 # Password validation
